@@ -9,180 +9,166 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --gold:#c9a84c;--gold-light:#f0d080;--gold-dim:#6a5520;
-  --bg:#06070d;--card:rgba(10,11,20,0.95);--card-h:rgba(16,17,30,0.98);
-  --text:#e8e4d9;--dim:#7a7570;--red:#cc2200;--border:rgba(201,168,76,0.18);
+  --gold:#d4a017;--gold-light:#f0cc60;--gold-dim:#5a4208;
+  --green:#0d3b0d;--green-mid:#1a5c1a;--green-bright:#2ea82e;
+  --bg:#050c05;--card:rgba(8,18,8,0.96);--card-h:rgba(13,26,13,0.98);
+  --text:#eeeae0;--dim:#7a8870;--red:#cc1100;--border:rgba(212,160,23,0.18);
+  --white:#f5f5f0;
 }
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:'Crimson Text',Georgia,serif;min-height:100vh;overflow-x:hidden;}
 canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
-
-/* ── SCREENS ── */
 .scr{position:relative;z-index:1;min-height:100vh;display:none;animation:fadeUp .5s ease;}
 .scr.on{display:block;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-
-/* ── NAV ── */
-#nav{position:fixed;top:0;left:0;right:0;z-index:90;padding:18px 40px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(#06070d,transparent);}
-.nav-logo{font-family:'Cinzel',serif;font-size:13px;letter-spacing:5px;color:var(--gold);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+#nav{position:fixed;top:0;left:0;right:0;z-index:90;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(var(--bg),transparent);}
+.nav-logo{font-family:'Cinzel',serif;font-size:12px;letter-spacing:5px;color:var(--gold);}
 #nav-back{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--dim);cursor:pointer;background:none;border:none;transition:color .2s;}
 #nav-back:hover{color:var(--text);}
 #nav-back.hide{visibility:hidden;}
-
-/* ── LANDING ── */
 #s-land{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 24px 80px;min-height:100vh;}
 .eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:6px;color:var(--gold);opacity:.7;margin-bottom:28px;text-transform:uppercase;}
-.land-title{font-family:'Cinzel',serif;font-size:clamp(56px,10vw,110px);font-weight:900;line-height:.9;letter-spacing:10px;background:linear-gradient(135deg,#a07830,#f0d080,#c9a84c,#f0d080,#8a6020);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite;margin-bottom:14px;}
+.land-title{font-family:'Cinzel',serif;font-size:clamp(52px,10vw,108px);font-weight:900;line-height:.9;letter-spacing:10px;background:linear-gradient(135deg,#8a6010,#f0cc60,#d4a017,#f0cc60,#7a5010);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 5s linear infinite;margin-bottom:14px;}
 @keyframes shimmer{0%{background-position:0%;}100%{background-position:300%;}}
-.land-sub{font-family:'Cinzel',serif;font-size:clamp(12px,2vw,16px);letter-spacing:5px;color:var(--dim);margin-bottom:70px;}
-.land-q{font-family:'Cinzel',serif;font-size:clamp(17px,3vw,26px);line-height:1.65;max-width:680px;margin-bottom:55px;color:var(--text);}
+.land-sub{font-family:'Cinzel',serif;font-size:clamp(11px,2vw,15px);letter-spacing:6px;color:var(--dim);margin-bottom:60px;}
+.land-q{font-family:'Cinzel',serif;font-size:clamp(16px,2.5vw,24px);line-height:1.7;max-width:660px;margin-bottom:50px;color:var(--white);}
 .land-q em{color:var(--gold);font-style:normal;}
-.land-facts{list-style:none;margin-bottom:65px;display:flex;flex-direction:column;gap:14px;}
-.land-facts li{font-size:17px;color:var(--dim);letter-spacing:.5px;position:relative;padding-left:22px;}
-.land-facts li::before{content:'—';position:absolute;left:0;color:var(--gold);}
-.land-facts li.hi{color:var(--text);font-size:18px;font-weight:600;}
+.land-facts{list-style:none;margin-bottom:60px;display:flex;flex-direction:column;gap:13px;}
+.land-facts li{font-size:17px;color:var(--dim);padding-left:22px;position:relative;}
+.land-facts li::before{content:'—';position:absolute;left:0;color:var(--green-bright);}
+.land-facts li.hi{color:var(--white);font-size:19px;font-style:italic;}
 .land-facts li.hi::before{content:'';}
-.land-note{margin-top:28px;font-size:13px;color:var(--dim);font-style:italic;}
-
-/* ── BUTTONS ── */
+.land-note{margin-top:26px;font-size:13px;color:var(--dim);font-style:italic;}
 .btn{font-family:'Cinzel',serif;letter-spacing:3px;text-transform:uppercase;cursor:pointer;border:none;transition:all .25s ease;}
-.btn-gold{font-size:13px;color:#06070d;background:linear-gradient(135deg,#c9a84c,#f0d080);padding:17px 48px;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);}
-.btn-gold:hover{background:linear-gradient(135deg,#f0d080,#c9a84c);transform:translateY(-3px);box-shadow:0 12px 35px rgba(201,168,76,.35);}
-.btn-outline{font-size:11px;color:var(--gold);background:transparent;border:1px solid rgba(201,168,76,.4);padding:13px 32px;}
-.btn-outline:hover{background:rgba(201,168,76,.07);transform:translateY(-2px);}
-.btn-red{font-size:13px;color:#fff;background:linear-gradient(135deg,#8b0000,#cc2200);padding:17px 48px;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);}
-.btn-red:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(204,34,0,.35);}
-
-/* ── CHARACTER SELECT ── */
+.btn-gold{font-size:12px;color:#050c05;background:linear-gradient(135deg,#d4a017,#f0cc60);padding:16px 46px;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);}
+.btn-gold:hover{background:linear-gradient(135deg,#f0cc60,#d4a017);transform:translateY(-3px);box-shadow:0 12px 35px rgba(212,160,23,.35);}
+.btn-outline{font-size:11px;color:var(--gold);background:transparent;border:1px solid rgba(212,160,23,.35);padding:13px 30px;}
+.btn-outline:hover{background:rgba(212,160,23,.06);transform:translateY(-2px);}
+.btn-red{font-size:12px;color:#fff;background:linear-gradient(135deg,#7a0000,#cc1100);padding:16px 46px;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);}
+.btn-red:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(204,17,0,.35);}
 #s-select{padding:110px 36px 70px;}
-.sh{text-align:center;margin-bottom:55px;}
-.sh h2{font-family:'Cinzel',serif;font-size:clamp(22px,4vw,38px);font-weight:700;margin-bottom:10px;}
-.sh p{font-size:17px;color:var(--dim);max-width:580px;margin:0 auto;line-height:1.7;}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px;max-width:1140px;margin:0 auto;}
-
-/* ── CHARACTER CARD ── */
-.ccard{background:var(--card);border:1px solid var(--border);padding:26px;cursor:pointer;transition:all .3s ease;position:relative;overflow:hidden;backdrop-filter:blur(12px);}
+.sh{text-align:center;margin-bottom:52px;}
+.sh h2{font-family:'Cinzel',serif;font-size:clamp(20px,4vw,36px);font-weight:700;margin-bottom:10px;}
+.sh p{font-size:17px;color:var(--dim);max-width:560px;margin:0 auto;line-height:1.7;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:20px;max-width:1120px;margin:0 auto;}
+.ccard{background:var(--card);border:1px solid var(--border);padding:26px;cursor:pointer;transition:all .3s ease;position:relative;overflow:hidden;backdrop-filter:blur(10px);}
 .ccard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cc);transition:width .3s;}
-.ccard:hover{background:var(--card-h);border-color:var(--cc);transform:translateY(-5px);box-shadow:0 22px 50px rgba(0,0,0,.6),0 0 25px rgba(201,168,76,.08);}
+.ccard:hover{background:var(--card-h);border-color:var(--cc);transform:translateY(-5px);box-shadow:0 22px 50px rgba(0,0,0,.7);}
 .ccard:hover::before{width:5px;}
-.ccard-top{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
-.avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:17px;font-weight:700;flex-shrink:0;border:2px solid var(--cc);background:var(--cc-dim);color:var(--cc);}
-.ccard-name{font-family:'Cinzel',serif;font-size:14px;font-weight:700;line-height:1.3;margin-bottom:3px;}
-.ccard-sub{font-size:12px;color:var(--dim);letter-spacing:.5px;}
+.ccard-top{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+.avatar{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:16px;font-weight:700;flex-shrink:0;border:2px solid var(--cc);background:var(--cd);color:var(--cc);}
+.ccard-name{font-family:'Cinzel',serif;font-size:13px;font-weight:700;line-height:1.3;margin-bottom:3px;}
+.ccard-sub{font-size:12px;color:var(--dim);letter-spacing:.4px;}
 .stat-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim);margin-bottom:7px;}
-.stat-lbl{color:var(--gold);font-weight:600;font-size:11px;letter-spacing:1px;min-width:72px;}
+.stat-lbl{color:var(--gold);font-weight:600;font-size:10px;letter-spacing:1.5px;min-width:70px;}
 .diff-bar{display:flex;gap:4px;align-items:center;}
-.dd{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.1);}
+.dd{width:8px;height:8px;border-radius:1px;background:rgba(255,255,255,.08);}
 .dd.on{background:var(--dc);}
-.diff-txt{font-size:11px;letter-spacing:1px;margin-left:7px;color:var(--dc);}
-.ccard-hook{font-size:13px;color:var(--dim);font-style:italic;line-height:1.65;border-left:2px solid var(--cc);padding-left:12px;margin:14px 0 18px;}
-.ccard-cta{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--cc);text-transform:uppercase;display:flex;align-items:center;gap:7px;}
+.diff-txt{font-size:10px;letter-spacing:1px;margin-left:6px;color:var(--dc);}
+.ccard-hook{font-size:13px;color:var(--dim);font-style:italic;line-height:1.65;border-left:2px solid var(--cc);padding-left:12px;margin:13px 0 16px;}
+.ccard-cta{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--cc);text-transform:uppercase;display:flex;align-items:center;gap:7px;}
 .ccard-cta::after{content:'→';transition:transform .2s;}
 .ccard:hover .ccard-cta::after{transform:translateX(5px);}
-
-/* ── BIO MODAL ── */
-#bio-modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(6,7,13,.88);backdrop-filter:blur(8px);}
+#bio-modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(5,12,5,.9);backdrop-filter:blur(8px);}
 #bio-modal.open{display:flex;}
-.bio-box{background:rgba(8,9,18,.98);border:1px solid var(--border);max-width:720px;width:100%;max-height:92vh;overflow-y:auto;padding:50px;position:relative;animation:fadeUp .35s ease;}
-.bio-x{position:absolute;top:18px;right:22px;background:none;border:none;color:var(--dim);font-size:22px;cursor:pointer;font-family:serif;}
+.bio-box{background:rgba(6,14,6,.99);border:1px solid var(--border);max-width:720px;width:100%;max-height:92vh;overflow-y:auto;padding:48px;position:relative;animation:fadeUp .3s ease;}
+.bio-x{position:absolute;top:16px;right:20px;background:none;border:none;color:var(--dim);font-size:22px;cursor:pointer;}
 .bio-x:hover{color:var(--text);}
-.bio-top{display:flex;gap:22px;align-items:flex-start;margin-bottom:28px;}
-.bio-av{width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:28px;font-weight:700;flex-shrink:0;border:3px solid var(--bcc);background:var(--bcc-dim);color:var(--bcc);}
-.bio-name{font-family:'Cinzel',serif;font-size:20px;font-weight:700;margin-bottom:5px;}
-.bio-sub{font-size:13px;color:var(--gold);letter-spacing:2px;margin-bottom:4px;}
+.bio-top{display:flex;gap:20px;align-items:flex-start;margin-bottom:26px;}
+.bio-av{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:26px;font-weight:700;flex-shrink:0;border:3px solid var(--bcc);background:var(--bcd);color:var(--bcc);}
+.bio-name{font-family:'Cinzel',serif;font-size:19px;font-weight:700;margin-bottom:5px;}
+.bio-sub{font-size:13px;color:var(--gold);letter-spacing:1.5px;margin-bottom:4px;}
 .bio-fund{font-size:12px;color:var(--dim);}
-.bio-mission{font-size:15px;color:var(--dim);font-style:italic;background:rgba(201,168,76,.04);border-left:3px solid var(--gold);padding:13px 18px;margin-bottom:22px;line-height:1.7;}
-.bio-text{font-size:17px;color:var(--text);line-height:1.9;margin-bottom:30px;}
+.bio-mission{font-size:15px;color:var(--dim);font-style:italic;background:rgba(212,160,23,.04);border-left:3px solid var(--gold);padding:13px 18px;margin-bottom:20px;line-height:1.7;}
+.bio-text{font-size:17px;color:var(--text);line-height:1.9;margin-bottom:28px;}
 .bio-acts{display:flex;gap:14px;flex-wrap:wrap;}
-
-/* ── PHASE SCREENS ── */
-.phase-wrap{max-width:880px;margin:0 auto;padding:110px 36px 70px;}
-.phase-ind{display:flex;gap:8px;margin-bottom:52px;align-items:center;}
-.pd{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.12);transition:background .3s;}
+.phase-wrap{max-width:860px;margin:0 auto;padding:110px 36px 70px;}
+.phase-ind{display:flex;gap:8px;margin-bottom:48px;align-items:center;}
+.pd{width:9px;height:9px;border-radius:1px;background:rgba(255,255,255,.1);transition:background .3s;}
 .pd.on{background:var(--gold);}
-.pd.done{background:var(--gold-dim);}
+.pd.done{background:var(--green-mid);}
 .ph-lbl{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-left:12px;}
-.dec-ctx{font-size:12px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
-.dec-setup{font-size:16px;color:var(--dim);line-height:1.7;margin-bottom:20px;font-style:italic;}
-.dec-q{font-family:'Cinzel',serif;font-size:clamp(19px,3vw,28px);color:var(--text);margin-bottom:40px;line-height:1.5;}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:38px;}
-@media(max-width:580px){.opts{grid-template-columns:1fr;}}
-.opt{background:var(--card);border:1px solid var(--border);padding:28px;cursor:pointer;transition:all .3s ease;}
-.opt:hover{border-color:var(--gold);background:rgba(201,168,76,.04);transform:translateY(-3px);}
-.opt.sel{border-color:var(--gold);background:rgba(201,168,76,.07);pointer-events:none;}
-.opt-lbl{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--gold);margin-bottom:10px;}
-.opt-txt{font-size:17px;color:var(--text);line-height:1.6;font-style:italic;}
-.reveal{display:none;background:rgba(6,7,13,.99);border:1px solid var(--gold);padding:38px;margin-bottom:36px;}
+.scenario-prog{display:flex;gap:6px;margin-bottom:32px;align-items:center;}
+.sp{height:3px;flex:1;background:rgba(255,255,255,.1);border-radius:1px;transition:background .4s;}
+.sp.done{background:var(--green-mid);}
+.sp.on{background:var(--gold);}
+.sp-lbl{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--dim);margin-left:10px;white-space:nowrap;}
+.dec-ctx{font-size:11px;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;}
+.dec-year{font-family:'Cinzel',serif;font-size:clamp(32px,6vw,62px);font-weight:900;color:rgba(212,160,23,.1);line-height:1;margin-bottom:-8px;}
+.ctx-box{background:rgba(26,92,26,.07);border:1px solid rgba(46,168,46,.15);padding:20px 24px;margin-bottom:28px;position:relative;}
+.ctx-box::before{content:'CONTEXT';position:absolute;top:-9px;left:18px;background:var(--bg);padding:0 8px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--green-bright);}
+.ctx-txt{font-size:15px;color:var(--dim);line-height:1.7;font-style:italic;}
+.dec-q{font-family:'Cinzel',serif;font-size:clamp(17px,2.8vw,26px);color:var(--white);margin-bottom:32px;line-height:1.5;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;}
+@media(max-width:560px){.opts{grid-template-columns:1fr;}}
+.opt{background:var(--card);border:1px solid var(--border);padding:26px;cursor:pointer;transition:all .3s ease;position:relative;}
+.opt:hover{border-color:rgba(212,160,23,.5);background:rgba(212,160,23,.04);transform:translateY(-3px);}
+.opt.sel{border-color:var(--gold);background:rgba(212,160,23,.06);pointer-events:none;}
+.opt.sel::after{content:'YOUR CHOICE';position:absolute;top:10px;right:12px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;color:var(--gold);}
+.opt-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--gold);margin-bottom:10px;}
+.opt-txt{font-size:16px;color:var(--text);line-height:1.65;font-style:italic;}
+.reveal{display:none;background:rgba(5,12,5,.99);border:1px solid rgba(212,160,23,.3);padding:32px;margin-bottom:26px;}
 .reveal.show{display:block;animation:fadeUp .4s ease;}
-.rev-lbl{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:14px;}
+.rev-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:12px;}
 .rev-lbl::after{content:'';flex:1;height:1px;background:var(--border);}
 .rev-txt{font-size:17px;color:var(--text);line-height:1.9;}
-#p1-next{display:none;text-align:center;margin-top:28px;}
-#p1-next p{font-size:15px;color:var(--dim);font-style:italic;margin-bottom:18px;}
-
-/* ── NARRATIVE SCREENS (P2, P3) ── */
-.narr-sec{margin-bottom:52px;padding-bottom:52px;border-bottom:1px solid var(--border);}
+.consequence{display:none;background:rgba(60,0,0,.15);border:1px solid rgba(204,17,0,.25);padding:20px 24px;margin-top:16px;}
+.consequence.show{display:block;animation:fadeUp .3s ease .25s both;}
+.con-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--red);margin-bottom:10px;}
+.con-txt{font-size:15px;color:#c8b0a8;line-height:1.8;}
+.next-btn-row{display:none;text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--border);}
+.next-btn-row p{font-size:15px;color:var(--dim);font-style:italic;margin-bottom:14px;}
+.narr-sec{margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid rgba(212,160,23,.08);}
 .narr-sec:last-of-type{border-bottom:none;}
-.narr-who{font-family:'Cinzel',serif;font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:5px;}
-.narr-sport{font-size:13px;color:var(--dim);letter-spacing:1px;margin-bottom:22px;}
-.narr-txt{font-size:17px;color:var(--text);line-height:1.95;}
-.pull{font-family:'Cinzel',serif;font-size:17px;color:var(--gold);border-left:3px solid var(--gold);padding:15px 22px;margin:26px 0;line-height:1.65;font-style:italic;}
-.sec-end{text-align:center;margin-top:60px;}
-
-/* ── DOSSIER ── */
-.dos-head{text-align:center;padding:30px;border-bottom:1px solid var(--border);margin-bottom:42px;position:relative;}
-.leaked{font-family:'Cinzel',serif;font-size:40px;font-weight:900;color:rgba(204,34,0,.12);letter-spacing:10px;text-transform:uppercase;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-12deg);pointer-events:none;white-space:nowrap;}
-.dos-item{display:flex;gap:20px;padding:22px 0;border-bottom:1px solid rgba(201,168,76,.09);align-items:flex-start;}
-.dos-n{font-family:'Cinzel',serif;font-size:26px;font-weight:900;color:var(--gold);min-width:38px;opacity:.35;}
+.narr-who{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:4px;}
+.narr-sport{font-size:13px;color:var(--dim);letter-spacing:.8px;margin-bottom:20px;}
+.narr-txt{font-size:17px;color:var(--text);line-height:1.95;margin-bottom:14px;}
+.pull{font-family:'Cinzel',serif;font-size:16px;color:var(--gold);border-left:3px solid var(--gold);padding:14px 20px;margin:22px 0;line-height:1.7;font-style:italic;background:rgba(212,160,23,.03);}
+.red-card{display:inline-block;background:var(--red);color:white;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;padding:4px 10px;margin-bottom:12px;text-transform:uppercase;}
+.sec-end{text-align:center;margin-top:52px;}
+.dos-head{text-align:center;padding:28px;border-bottom:1px solid var(--border);margin-bottom:38px;position:relative;overflow:hidden;}
+.leaked{font-family:'Cinzel',serif;font-size:36px;font-weight:900;color:rgba(204,17,0,.1);letter-spacing:10px;text-transform:uppercase;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-12deg);pointer-events:none;white-space:nowrap;}
+.dos-item{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid rgba(212,160,23,.07);align-items:flex-start;}
+.dos-n{font-family:'Cinzel',serif;font-size:24px;font-weight:900;color:var(--gold);min-width:36px;opacity:.3;}
 .dos-t{font-size:17px;color:var(--text);line-height:1.85;}
 .dos-t strong{color:var(--gold);}
-
-/* ── BIG PICTURE ── */
-.nodes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:36px 0;}
+.nodes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0;}
 .node{background:var(--card);border:1px solid var(--border);padding:20px;text-align:center;}
 .node-t{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);margin-bottom:8px;}
-.node-d{font-size:13px;color:var(--dim);line-height:1.5;}
-.arrow-row{display:flex;justify-content:center;font-size:28px;color:var(--gold-dim);margin:6px 0;}
-.source-node{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.25);padding:22px;text-align:center;margin-bottom:40px;}
-@media(max-width:580px){.nodes{grid-template-columns:1fr;}}
-
-/* ── VERDICT ── */
+.node-d{font-size:13px;color:var(--dim);line-height:1.55;}
+.arrow-row{display:flex;justify-content:center;font-size:26px;color:var(--gold-dim);margin:6px 0;}
+.source-node{background:rgba(212,160,23,.04);border:1px solid rgba(212,160,23,.22);padding:22px;text-align:center;margin-bottom:36px;}
+@media(max-width:560px){.nodes{grid-template-columns:1fr;}}
 #s-verdict{padding:130px 36px 100px;}
 .verdict-wrap{max-width:800px;margin:0 auto;text-align:center;}
-.vbody{font-size:18px;color:var(--text);line-height:1.95;text-align:left;margin-bottom:30px;}
-.vqs{display:flex;flex-direction:column;gap:22px;margin:55px 0;}
-.vq{font-family:'Cinzel',serif;font-size:clamp(17px,3vw,25px);color:var(--text);opacity:0;transform:translateY(18px);transition:all .65s ease;}
+.vbody{font-size:18px;color:var(--text);line-height:1.95;text-align:left;margin-bottom:26px;}
+.vqs{display:flex;flex-direction:column;gap:20px;margin:48px 0;}
+.vq{font-family:'Cinzel',serif;font-size:clamp(16px,3vw,24px);color:var(--white);opacity:0;transform:translateY(16px);transition:all .65s ease;}
 .vq.vis{opacity:1;transform:translateY(0);}
-.v-close{font-family:'Cinzel',serif;font-size:17px;color:var(--dim);font-style:italic;line-height:1.9;margin:50px 0;}
-.v-acts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:80px;}
-.credits{font-size:13px;color:var(--dim);line-height:1.8;max-width:700px;margin:0 auto;}
-
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:4px;}
+.v-close{font-family:'Cinzel',serif;font-size:17px;color:var(--dim);font-style:italic;line-height:1.9;margin:46px 0;}
+.v-acts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:68px;}
+.credits{font-size:13px;color:var(--dim);line-height:1.9;max-width:680px;margin:0 auto;}
+::-webkit-scrollbar{width:3px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:var(--gold-dim);}
+::-webkit-scrollbar-thumb{background:var(--green-mid);}
 </style>
 </head>
 <body>
-
 <canvas id="bg"></canvas>
-
 <nav id="nav">
   <div class="nav-logo">THE PLAYBOOK</div>
-  <button id="nav-back" class="hide" onclick="goBack()">← Back</button>
+  <div style="display:flex;gap:20px;align-items:center;">
+    <button onclick="go('wc')" style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--dim);cursor:pointer;background:none;border:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--dim)'">Works Cited</button>
+    <button id="nav-back" class="hide" onclick="goBack()">&#x2190; Back</button>
+  </div>
 </nav>
 
-<!-- ════ LANDING ════ -->
+<!-- LANDING -->
 <div class="scr on" id="s-land">
   <p class="eyebrow">Arun Das &nbsp;·&nbsp; AP English Research Project</p>
   <h1 class="land-title">THE<br>PLAYBOOK</h1>
   <p class="land-sub">A Sports Power Simulator</p>
-  <p class="land-q">
-    You have unlimited <em>oil money.</em><br>
-    A country the world has never heard of.<br>
-    And the most-watched sports on earth<br>sitting right in front of you.<br><br>
-    <em>What do you buy first?</em>
-  </p>
+  <p class="land-q">You have unlimited <em>oil money.</em><br>A country the world has never heard of.<br>And the most-watched sports on earth sitting right in front of you.<br><br><em>What do you buy first?</em></p>
   <ul class="land-facts">
     <li>Seven men. Three countries. Four sports. One strategy.</li>
     <li>They bought football clubs, golf tours, Formula 1 races, and a World Cup.</li>
@@ -190,28 +176,28 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
     <li class="hi">None of them were ever prosecuted.</li>
   </ul>
   <button class="btn btn-gold" onclick="go('select')">Step Inside</button>
-  <p class="land-note">Gulf sovereign wealth funds deployed over $136 billion in deals in 2024 alone &nbsp;(The National, 2025)</p>
+  <p class="land-note">Gulf sovereign wealth funds deployed over $136 billion in deals in 2024 alone &nbsp;("Mubadala Emerges")</p>
 </div>
 
-<!-- ════ CHARACTER SELECT ════ -->
+<!-- CHARACTER SELECT -->
 <div class="scr" id="s-select">
   <div class="sh">
     <p class="eyebrow">Choose Your Character</p>
     <h2>Select a Real-World Power Player</h2>
-    <p>Each of these figures made real decisions that changed global sports forever.<br>Pick one. Make their choices. Then see what actually happened.</p>
+    <p>Each of these figures made real decisions that changed global sports forever. Pick one. Make their choices. Then see what actually happened.</p>
   </div>
   <div class="grid" id="char-grid"></div>
 </div>
 
-<!-- ════ BIO MODAL ════ -->
+<!-- BIO MODAL -->
 <div id="bio-modal">
   <div class="bio-box" id="bio-box">
-    <button class="bio-x" onclick="closeBio()">✕</button>
+    <button class="bio-x" onclick="closeBio()">&#x2715;</button>
     <div id="bio-inner"></div>
   </div>
 </div>
 
-<!-- ════ PHASE 1 ════ -->
+<!-- PHASE 1 -->
 <div class="scr" id="s-p1">
   <div class="phase-wrap">
     <div class="phase-ind">
@@ -222,7 +208,7 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
   </div>
 </div>
 
-<!-- ════ PHASE 2 ════ -->
+<!-- PHASE 2 -->
 <div class="scr" id="s-p2">
   <div class="phase-wrap">
     <div class="phase-ind">
@@ -230,38 +216,32 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
       <span class="ph-lbl">Phase 2 — The Friction</span>
     </div>
     <p class="dec-ctx">2018 — 2022</p>
-    <h2 class="dec-q">Scrutiny arrives. What does each empire do?</h2>
-    <p class="dec-setup">The key point here is not that the scrutiny was new — it is that every institution with the power to act chose not to.</p>
-
+    <h2 style="font-family:'Cinzel',serif;font-size:clamp(18px,3vw,28px);margin-bottom:10px;color:var(--white);">The world starts paying attention.</h2>
+    <p style="font-size:17px;color:var(--dim);margin-bottom:40px;line-height:1.7;">The key point is not that the scrutiny was new. It is that every institution with the power to act chose not to.</p>
     <div class="narr-sec">
       <p class="narr-who">Khaldoon Al Mubarak — Manchester City</p>
       <p class="narr-sport">Abu Dhabi | Premier League</p>
-      <p class="narr-txt">The friction arrived in 2018 when German magazine Der Spiegel published a series of investigative reports based on emails hacked by Portuguese whistleblower Rui Pinto, later known as Football Leaks. The leaked documents alleged that Abu Dhabi owner Sheikh Mansour had routed funds through UAE-based sponsor companies — including Etihad Airways and Aabar Investment — to funnel money directly into Manchester City while disguising it as commercial sponsorship income. Those accounts, the documents alleged, were managed by Al Mubarak's own government agency, the Executive Affairs Authority (Wikipedia).</p>
-      <div class="pull">"UEFA investigated and initially banned Manchester City from European competition for two seasons — then the Court of Arbitration for Sport overturned it. Not because City was cleared. Because the statute of limitations had run."</div>
+      <p class="narr-txt">The friction arrived in 2018 when German magazine Der Spiegel published investigative reports based on emails hacked by Portuguese whistleblower Rui Pinto, known as Football Leaks. The leaked documents alleged that Abu Dhabi owner Sheikh Mansour had routed funds through UAE-based sponsor companies — including Etihad Airways and Aabar Investment — to funnel money into Manchester City while disguising it as commercial sponsorship income. Those accounts, the documents alleged, were managed by Al Mubarak's own government agency, the Executive Affairs Authority ("Khaldoon Khalifa" — Wikipedia).</p>
+      <div class="pull">"UEFA investigated and initially banned Manchester City from European competition for two seasons. The Court of Arbitration for Sport overturned it — not because City was cleared, but because the statute of limitations had run on some charges."</div>
       <p class="narr-txt">The Premier League launched its own separate investigation, which ran for four years before producing formal charges in February 2023.</p>
     </div>
-
     <div class="narr-sec">
       <p class="narr-who">Yasir Al-Rumayyan — Newcastle United & LIV Golf</p>
       <p class="narr-sport">Saudi Arabia | Premier League & Golf</p>
       <p class="narr-txt">For Al-Rumayyan, the friction came from two directions simultaneously. The PGA Tour, facing mass defections of its top players to LIV, filed an antitrust lawsuit. In their legal response, LIV's lawyers argued that because PIF was a sovereign government fund, it was entitled to sovereign immunity and could not be compelled to produce documents in US proceedings.</p>
-      <div class="pull">"In making that argument, they described PIF as 'a sovereign instrumentality of the Kingdom of Saudi Arabia' and Al-Rumayyan as 'a sitting minister of the Saudi government' — the exact opposite of what PIF had told the Premier League." (CNN, 2023)</div>
-      <p class="narr-txt">Amnesty International immediately called on the Premier League to re-examine the assurances it had accepted, stating it was "stretching credulity to breaking point" to believe the Saudi state was not directing the buyout (Sky Sports, 2023).</p>
+      <div class="pull">"They described PIF as 'a sovereign instrumentality of the Kingdom of Saudi Arabia' and Al-Rumayyan as 'a sitting minister of the Saudi government' — the exact opposite of what PIF had told the Premier League." ("Court Filing Casts")</div>
+      <p class="narr-txt">Amnesty International immediately called on the Premier League to re-examine the assurances it had accepted, with its UK Economic Affairs Director stating it was "stretching credulity to breaking point" to believe the Saudi state was not directing the buyout ("Premier League Told").</p>
     </div>
-
     <div class="narr-sec">
       <p class="narr-who">Tamim bin Hamad Al Thani — The 2022 World Cup</p>
       <p class="narr-sport">Qatar | FIFA</p>
-      <p class="narr-txt">For Qatar, the friction was visible from the moment the bid was won in 2010. Qatar's Kafala system — under which a worker's ability to remain in Qatar legally depended entirely on their employer's approval, leaving them unable to switch jobs or return home without that sponsor's consent — was documented extensively by Human Rights Watch, Amnesty International, and The Guardian before a single stadium had been built. Qatar announced plans to abolish Kafala in 2014 but delayed implementation until 2016, and even the eventual reforms still left employers with significant control over workers (Wikipedia). The International Trade Union Confederation estimated as early as 2013 that over 1,200 workers had died on infrastructure projects connected to the World Cup. A 2021 Guardian investigation put the figure at 6,500 migrant worker deaths since the bid was awarded.</p>
+      <p class="narr-txt">For Qatar, the friction was visible from the moment the bid was won in 2010. Qatar's Kafala system — under which a worker's ability to remain in Qatar legally depended entirely on their employer's approval, leaving them unable to switch jobs or return home without that sponsor's consent — was documented extensively by Human Rights Watch, Amnesty International, and The Guardian before a single stadium had been built. Qatar announced plans to abolish Kafala in 2014 but delayed implementation until 2016, and even the eventual reforms still left employers with significant control over workers ("Human Rights Issues"). The International Trade Union Confederation estimated as early as 2013 that over 1,200 workers had died on infrastructure projects connected to the World Cup. A 2021 Guardian investigation put the figure at 6,500 migrant worker deaths since the bid was awarded.</p>
     </div>
-
-    <div class="sec-end">
-      <button class="btn btn-gold" onclick="go('p3')">Continue to Phase 3 →</button>
-    </div>
+    <div class="sec-end"><button class="btn btn-gold" onclick="go('p3')">Continue to Phase 3 &#x2192;</button></div>
   </div>
 </div>
 
-<!-- ════ PHASE 3 ════ -->
+<!-- PHASE 3 -->
 <div class="scr" id="s-p3">
   <div class="phase-wrap">
     <div class="phase-ind">
@@ -269,472 +249,403 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
       <span class="ph-lbl" style="color:var(--red);">Phase 3 — The Dirt</span>
     </div>
     <p class="dec-ctx" style="color:var(--red);">2022 — Present</p>
-    <h2 class="dec-q">No more game framing. Just what happened.</h2>
-
+    <h2 style="font-family:'Cinzel',serif;font-size:clamp(17px,3vw,27px);margin-bottom:36px;color:var(--white);">No more game framing. Just what happened.</h2>
     <div class="narr-sec">
+      <div class="red-card">Red Card</div>
       <p class="narr-who" style="color:#e06060;">Manchester City — 115 Charges</p>
       <p class="narr-sport">Still unresolved. Still playing. Still spending.</p>
-      <p class="narr-txt">Manchester City's 115 charges remain unresolved. The Premier League formally charged the club in February 2023 with more than 100 alleged breaches of financial rules covering a nine-year period from 2009 to 2018 — with the true number of charges believed to be closer to 130 (Sky Sports). An independent commission heard the case across ten weeks from September to December 2024. As of early 2026, no verdict has been delivered. Since the hearing concluded, Manchester City spent nearly £500 million on new players (SPORTbible, 2026). The delay itself has become its own scandal, with Premier League officials privately expressing that it was causing "undue damage" to the competition's credibility (Goal.com, 2025).</p>
+      <p class="narr-txt">Manchester City's 115 charges remain unresolved. The Premier League formally charged the club in February 2023 with more than 100 alleged breaches of financial rules covering a nine-year period from 2009 to 2018 — with the true number of charges believed to be closer to 130 ("Man City Premier League"). An independent commission heard the case across ten weeks from September to December 2024. As of early 2026, no verdict has been delivered. Since the hearing concluded, Manchester City spent nearly £500 million on new players ("Man City 115 Charges"). The delay became its own scandal, with Premier League officials privately expressing it was causing "undue damage" to the competition's credibility ("Man City FFP Case").</p>
     </div>
-
     <div class="narr-sec">
+      <div class="red-card">Red Card</div>
       <p class="narr-who" style="color:#e06060;">Nasser Al-Khelaifi — Criminal Investigation</p>
       <p class="narr-sport">Vote buying. Broadcasting rights. Power.</p>
-      <p class="narr-txt">Al-Khelaifi was placed under formal criminal investigation in France on February 5, 2025, charged with complicity in vote buying, interference with voting freedom, and abuse of power in connection with the SCA Lagardere case (Yahoo Sports, 2025). This followed earlier Swiss federal charges in 2020 connected to World Cup broadcasting rights, which were ultimately dismissed. French prosecutors were also examining two payments totaling $3.5 million made by a company run by his brother, around the time Qatar was bidding to host major international athletics events (OCCRP). Qatar reportedly considered withdrawing its investment from both PSG and beIN Sports in response — a move that would devastate French football's broadcasting infrastructure entirely.</p>
+      <p class="narr-txt">Al-Khelaifi was placed under formal criminal investigation in France on February 5, 2025, charged with complicity in vote buying, interference with voting freedom, and abuse of power in connection with the SCA Lagardere case ("Nasser Al-Khelaifi's Indictment"). This followed earlier Swiss federal charges in 2020 connected to World Cup broadcasting rights, which were ultimately dismissed. French prosecutors were also examining two payments totaling $3.5 million made by a company run by his brother, around the time Qatar was bidding to host major international athletics events ("PSG Chief Charged"). Qatar reportedly considered withdrawing its investment from both PSG and beIN Sports — a move that would devastate French football's broadcasting infrastructure entirely.</p>
     </div>
-
     <div class="narr-sec">
+      <div class="red-card">Red Card</div>
       <p class="narr-who" style="color:#e06060;">Qatar World Cup — The Human Cost</p>
       <p class="narr-sport">The most serious consequence. The least resolved.</p>
-      <p class="narr-txt">Qatar's own World Cup secretary-general admitted in a November 2022 television interview that between 400 and 500 migrant workers had died in connection with tournament preparations, while simultaneously repeating the official position that only three work-related deaths had occurred on stadium construction sites — a direct contradiction that Human Rights Watch called a striking inadvertent admission (Human Rights Watch, 2022). A FIFA-commissioned report released in 2024 found that "severe human rights impacts did ultimately occur in Qatar from 2010 through 2022" and that "a credible argument can be made" that FIFA bore some responsibility — even as FIFA simultaneously declared Saudi Arabia's unopposed bid for the 2034 World Cup a "very strong all-round proposition" (NPR, 2024). No compensation fund for deceased workers' families was ever established. FIFA did not mandate one.</p>
+      <p class="narr-txt">Qatar's own World Cup secretary-general admitted in a November 2022 television interview that between 400 and 500 migrant workers had died in connection with tournament preparations, while simultaneously repeating the official position that only three work-related deaths had occurred on stadium construction sites — a direct contradiction that Human Rights Watch called a striking inadvertent admission ("Qatar World Cup Chief"). A FIFA-commissioned report released in 2024 found that "severe human rights impacts did ultimately occur in Qatar from 2010 through 2022" and that "a credible argument can be made" that FIFA bore some responsibility — even as FIFA simultaneously declared Saudi Arabia's unopposed bid for the 2034 World Cup a "very strong all-round proposition" (Minder). No compensation fund for deceased workers' families was ever established. FIFA did not mandate one.</p>
     </div>
-
     <div class="narr-sec">
+      <div class="red-card">Red Card</div>
       <p class="narr-who" style="color:#e06060;">Formula 1 — The Dependency Exposed</p>
       <p class="narr-sport">Bahrain and Saudi races cancelled. March 2026.</p>
-      <p class="narr-txt">Formula 1's Gulf dependency was exposed in March 2026 when the Bahrain and Saudi Arabian Grands Prix were cancelled due to regional conflict following US-Israeli strikes and Iranian retaliation. F1 CEO Stefano Domenicali described both countries as "incredibly important to the ecosystem of our racing season" while announcing their cancellation (Formula1.com, 2026). Bahrain and Saudi Arabia alone accounted for an estimated $115 million in combined annual hosting fees. The cancellations revealed what critics had argued for years: a sport that had structured a third of its calendar around nations paying from state treasuries had made itself financially dependent on governments operating under entirely different rules than private commercial promoters.</p>
+      <p class="narr-txt">Formula 1's Gulf dependency was exposed in March 2026 when the Bahrain and Saudi Arabian Grands Prix were cancelled due to regional conflict following US-Israeli strikes and Iranian retaliation. F1 CEO Stefano Domenicali described both countries as "incredibly important to the ecosystem of our racing season" while announcing their cancellation ("Bahrain and Saudi Arabian"). Bahrain and Saudi Arabia alone accounted for an estimated $115 million in combined annual hosting fees ("What the Bahrain"). The cancellations revealed what critics had argued for years: a sport that structured a third of its calendar around nations paying from state treasuries had made itself financially dependent on governments operating under entirely different rules than private commercial promoters.</p>
     </div>
-
-    <div class="sec-end">
-      <button class="btn btn-gold" onclick="go('dossier')">View the Dossier →</button>
-    </div>
+    <div class="sec-end"><button class="btn btn-gold" onclick="go('dossier')">View the Dossier &#x2192;</button></div>
   </div>
 </div>
 
-<!-- ════ DOSSIER ════ -->
+<!-- DOSSIER -->
 <div class="scr" id="s-dossier">
   <div class="phase-wrap" style="max-width:820px;">
     <div class="dos-head">
       <div class="leaked">LEAKED</div>
       <p class="eyebrow">Consequences Dossier</p>
-      <h2 style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,34px);">What the Headlines Said.<br>What the Records Showed.</h2>
+      <h2 style="font-family:'Cinzel',serif;font-size:clamp(18px,3.5vw,32px);">What the Headlines Said.<br>What the Records Showed.</h2>
     </div>
-
-    <div class="dos-item">
-      <span class="dos-n">01</span>
-      <p class="dos-t"><strong>Man City charged with 115+ violations across nine years.</strong> Verdict still pending as of early 2026 — over three years after charges were filed. In the time between the hearing ending and any verdict being reached, City spent nearly £500 million on players (SPORTbible, 2026; Goal.com, 2025).</p>
-    </div>
-    <div class="dos-item">
-      <span class="dos-n">02</span>
-      <p class="dos-t"><strong>PSG's president under formal criminal investigation in France for vote-buying.</strong> Qatar considering pulling its investment from the club and from beIN Sports entirely — which would collapse French football's broadcasting infrastructure (Yahoo Sports, 2025).</p>
-    </div>
-    <div class="dos-item">
-      <span class="dos-n">03</span>
-      <p class="dos-t"><strong>The assurances the Premier League accepted to approve Newcastle's Saudi takeover were directly contradicted in a US federal court</strong> by PIF's own lawyers, who described the fund as "a sovereign instrumentality" of Saudi Arabia and Al-Rumayyan as a sitting government minister (CNN, 2023).</p>
-    </div>
-    <div class="dos-item">
-      <span class="dos-n">04</span>
-      <p class="dos-t"><strong>A FIFA-commissioned report acknowledged that severe human rights impacts occurred in Qatar during World Cup preparations</strong> and that FIFA bore some responsibility. No remedy fund was established. Saudi Arabia was awarded the 2034 World Cup (NPR, 2024).</p>
-    </div>
-    <div class="dos-item">
-      <span class="dos-n">05</span>
-      <p class="dos-t"><strong>F1 described Bahrain and Saudi Arabia as "incredibly important" to its season while cancelling their 2026 races</strong> due to regional military conflict — exposing how deeply the sport had structured itself around Gulf state money (Formula1.com, 2026).</p>
-    </div>
-
-    <div class="sec-end" style="margin-top:50px;">
-      <button class="btn btn-gold" onclick="go('big')">See the Big Picture →</button>
-    </div>
+    <div class="dos-item"><span class="dos-n">01</span><p class="dos-t"><strong>Man City charged with 115+ violations across nine years.</strong> Verdict still pending over three years after charges were filed. In that time, City spent nearly &#x00A3;500 million on players ("Man City 115 Charges"; "Man City FFP Case").</p></div>
+    <div class="dos-item"><span class="dos-n">02</span><p class="dos-t"><strong>PSG's president under formal criminal investigation in France for vote-buying.</strong> Qatar considering pulling investment from the club and beIN Sports — which would collapse French football's broadcasting infrastructure ("Nasser Al-Khelaifi's Indictment").</p></div>
+    <div class="dos-item"><span class="dos-n">03</span><p class="dos-t"><strong>The assurances the Premier League accepted to approve Newcastle's Saudi takeover were directly contradicted in a US federal court</strong> by PIF's own lawyers, who described the fund as "a sovereign instrumentality" of Saudi Arabia and Al-Rumayyan as a sitting government minister ("Court Filing Casts").</p></div>
+    <div class="dos-item"><span class="dos-n">04</span><p class="dos-t"><strong>A FIFA-commissioned report acknowledged that severe human rights impacts occurred in Qatar during World Cup preparations</strong> and that FIFA bore some responsibility. No remedy fund was established. Saudi Arabia was awarded the 2034 World Cup (Minder).</p></div>
+    <div class="dos-item"><span class="dos-n">05</span><p class="dos-t"><strong>F1 described Bahrain and Saudi Arabia as "incredibly important" to its season while cancelling their 2026 races</strong> due to regional military conflict ("Bahrain and Saudi Arabian").</p></div>
+    <div class="sec-end" style="margin-top:46px;"><button class="btn btn-gold" onclick="go('big')">See the Big Picture &#x2192;</button></div>
   </div>
 </div>
 
-<!-- ════ BIG PICTURE ════ -->
+<!-- BIG PICTURE -->
 <div class="scr" id="s-big">
   <div class="phase-wrap" style="max-width:920px;">
     <p class="eyebrow">The Big Picture</p>
-    <h2 style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,36px);margin-bottom:12px;">One Strategy. Three Nations. Four Sports.</h2>
-    <p style="font-size:17px;color:var(--dim);margin-bottom:42px;line-height:1.7;">These are not separate stories. They are the same strategy, executed simultaneously.</p>
-
+    <h2 style="font-family:'Cinzel',serif;font-size:clamp(18px,4vw,34px);margin-bottom:10px;">One Strategy. Three Nations. Four Sports.</h2>
+    <p style="font-size:17px;color:var(--dim);margin-bottom:38px;line-height:1.7;">These are not separate stories. They are the same strategy, executed simultaneously.</p>
     <div class="nodes">
-      <div class="node">
-        <div class="node-t">🇦🇪 Mubadala</div>
-        <div class="node-d">Manchester City<br>Global AI & Finance</div>
-      </div>
-      <div class="node">
-        <div class="node-t">🇶🇦 Qatar Investment Authority</div>
-        <div class="node-d">PSG · beIN Sports<br>2022 World Cup</div>
-      </div>
-      <div class="node">
-        <div class="node-t">🇸🇦 Saudi Public Investment Fund</div>
-        <div class="node-d">Newcastle United<br>LIV Golf · 2034 World Cup</div>
-      </div>
+      <div class="node"><div class="node-t">&#x1F1E6;&#x1F1EA; Mubadala</div><div class="node-d">Manchester City<br>Global AI &amp; Finance</div></div>
+      <div class="node"><div class="node-t">&#x1F1F6;&#x1F1E6; Qatar Investment Authority</div><div class="node-d">PSG &#xB7; beIN Sports<br>2022 World Cup</div></div>
+      <div class="node"><div class="node-t">&#x1F1F8;&#x1F1E6; Public Investment Fund</div><div class="node-d">Newcastle United<br>LIV Golf &#xB7; 2034 World Cup</div></div>
     </div>
-
-    <div class="arrow-row">↓</div>
-
+    <div class="arrow-row">&#x2193;</div>
     <div class="source-node">
-      <div class="node-t" style="font-size:15px;margin-bottom:10px;">The Common Source</div>
-      <div class="node-d" style="font-size:15px;">Oil revenue managed by governments with documented human rights concerns<br>— deployed through sports as the primary vehicle for international rebranding</div>
+      <div class="node-t" style="font-size:15px;margin-bottom:8px;">The Common Source</div>
+      <div class="node-d" style="font-size:15px;line-height:1.65;">Oil revenue managed by governments with documented human rights concerns — deployed through sports as the primary vehicle for international rebranding</div>
     </div>
-
-    <p class="narr-txt" style="margin-bottom:28px;">The financial architecture behind every character in the simulator connects to a sovereign wealth fund. Mubadala controls Manchester City. The Qatar Investment Authority controls PSG and bankrolled the World Cup. The Saudi Public Investment Fund controls Newcastle, LIV Golf, and now has an exclusive agreement to invest further into the new PGA-LIV combined entity. All three funds operate from the same source — oil revenue managed by governments with documented human rights concerns — and all three deployed sports as the primary vehicle for international rebranding.</p>
-
-    <p class="narr-txt" style="margin-bottom:52px;">Scholars at Columbia University's Journal of International Affairs describe Qatar's approach as exercising "sharp power" — a form of influence that goes beyond soft power by actively shaping the institutions through which global sports are governed. The same framework applies across all three nations. By the time FIFA, UEFA, the Premier League, the PGA Tour, and Formula 1 understood the scale of what was happening, every one of those institutions had already taken the money. The central question The Playbook poses: if every governing body was financially dependent on Gulf investment, who was left to blow the whistle?</p>
-
-    <div class="sec-end">
-      <button class="btn btn-red" onclick="go('verdict')">Deliver Your Verdict →</button>
-    </div>
+    <p class="narr-txt" style="margin-bottom:24px;">The financial architecture behind every character in the simulator connects to a sovereign wealth fund. Mubadala controls Manchester City. The Qatar Investment Authority controls PSG and bankrolled the World Cup. The Saudi Public Investment Fund controls Newcastle, LIV Golf, and now has an exclusive agreement to invest further into the new PGA-LIV combined entity. All three funds operate from the same source — oil revenue managed by governments with documented human rights concerns — and all three deployed sports as the primary vehicle for international rebranding.</p>
+    <p class="narr-txt" style="margin-bottom:48px;">Scholars at Columbia University's Journal of International Affairs describe Qatar's approach as exercising "sharp power" — a form of influence that goes beyond soft power by actively shaping the institutions through which global sports are governed ("The Authoritarian's"). The same framework applies across all three nations. By the time FIFA, UEFA, the Premier League, the PGA Tour, and Formula 1 understood the scale of what was happening, every one of those institutions had already taken the money. The central question The Playbook poses: if every governing body was financially dependent on Gulf investment, who was left to blow the whistle?</p>
+    <div class="sec-end"><button class="btn btn-red" onclick="go('verdict')">Deliver Your Verdict &#x2192;</button></div>
   </div>
 </div>
 
-<!-- ════ VERDICT ════ -->
+<!-- VERDICT -->
 <div class="scr" id="s-verdict">
   <div class="verdict-wrap">
     <p class="eyebrow">The Verdict</p>
-    <h2 style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,34px);margin-bottom:44px;line-height:1.4;">You have seen the decisions.<br>You have seen the consequences.<br>You have seen who looked away.</h2>
-
+    <h2 style="font-family:'Cinzel',serif;font-size:clamp(18px,4vw,32px);margin-bottom:40px;line-height:1.45;">You have seen the decisions.<br>You have seen the consequences.<br>You have seen who looked away.</h2>
     <p class="vbody">UEFA settled with Manchester City rather than pursuing expulsion. The Premier League accepted assurances about Saudi state involvement that were later contradicted in a US federal court. FIFA awarded Qatar the World Cup despite documented labor rights abuses, then commissioned a report twelve years later acknowledging its own responsibility — while awarding the next World Cup to Saudi Arabia. The PGA Tour filed an antitrust lawsuit against LIV Golf and then attempted to merge with it. Formula 1 built a third of its calendar around nations paying hosting fees from state treasuries, then described those nations as essential to its season when conflict made them temporarily unreachable.</p>
-
     <p class="vbody">None of this was secret. The leaked emails, the court filings, the Guardian's investigation, the FIFA documents, the Amnesty International letters — all of it was public. The heist succeeded not because it was hidden, but because every institution with the power to stop it decided it was more profitable to look away.</p>
-
     <div class="vqs">
       <p class="vq" id="vq1">Was this a crime?</p>
       <p class="vq" id="vq2">Was anyone guilty?</p>
       <p class="vq" id="vq3">And why was no one ever prosecuted?</p>
     </div>
-
     <p class="v-close">The Playbook doesn't give you the answer.<br>That part is yours.</p>
-
     <div class="v-acts">
       <button class="btn btn-gold" onclick="go('select')">Play Again</button>
       <button class="btn btn-outline" onclick="go('land')">Back to Start</button>
     </div>
-
-    <p class="credits">Research Project by Arun Das — AP English<br><br>
-    Sources: Human Rights Watch · Sky Sports · CNN · NPR · Goal.com · SPORTbible · Yahoo Sports · Bloomberg · Golf Monthly · OCCRP · Formula1.com · The National · Columbia Journal of International Affairs · YIP Institute · ALQST · Taylor &amp; Francis · Wikipedia · Mubadala.com · cityam.com · Golf.com · Biz of Speed</p>
+    <p class="credits">Research Project by Arun Das — AP English<br><br>Sources: Human Rights Watch &#xB7; Sky Sports &#xB7; CNN &#xB7; NPR &#xB7; Goal.com &#xB7; SPORTbible &#xB7; Yahoo Sports &#xB7; Bloomberg &#xB7; Golf Monthly &#xB7; OCCRP &#xB7; Formula1.com &#xB7; The National &#xB7; Columbia Journal of International Affairs &#xB7; YIP Institute &#xB7; ALQST &#xB7; Taylor &amp; Francis &#xB7; Wikipedia &#xB7; Mubadala.com &#xB7; cityam.com &#xB7; Golf.com &#xB7; Biz of Speed</p>
   </div>
 </div>
 
+<!-- WORKS CITED -->
+<div class="scr" id="s-wc">
+  <div class="phase-wrap" style="max-width:860px;">
+    <p class="eyebrow">The Playbook — A Sports Power Simulator</p>
+    <h2 style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,34px);margin-bottom:8px;">Works Cited</h2>
+    <p style="font-size:14px;color:var(--dim);margin-bottom:12px;font-style:italic;">In-text citations appear in parentheses throughout the simulator. Each shortened title or author name below corresponds exactly to its in-text reference.</p>
+    <div style="height:1px;background:var(--border);margin-bottom:36px;"></div>
+
+    <div class="wc-note">
+      <p style="font-size:13px;color:var(--dim);font-style:italic;margin-bottom:28px;">All sources accessed 1 Apr. 2026. Citations formatted per MLA guidelines as required by Arun Das's AP English class.</p>
+    </div>
+
+    <div class="wc-list" id="wc-list"></div>
+
+    <div style="text-align:center;margin-top:52px;">
+      <button class="btn btn-outline" onclick="goBack()">&#x2190; Back to Simulator</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.wc-entry{padding:18px 0;border-bottom:1px solid rgba(212,160,23,.07);display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start;}
+.wc-entry:last-child{border-bottom:none;}
+.wc-key{font-family:'Cinzel',serif;font-size:11px;letter-spacing:1.5px;color:var(--gold);padding:5px 10px;background:rgba(212,160,23,.06);border:1px solid rgba(212,160,23,.15);text-align:center;line-height:1.4;}
+.wc-ref{font-size:16px;color:var(--text);line-height:1.75;}
+@media(max-width:600px){.wc-entry{grid-template-columns:1fr;gap:8px;}}
+</style>
+
 <script>
-// ═══════════════════════════════════════════
-// ANIMATED BACKGROUND
-// ═══════════════════════════════════════════
-const cv = document.getElementById('bg');
-const cx = cv.getContext('2d');
+const wcEntries=[
+  {key:'("Bahrain and Saudi Arabian")',ref:'"Bahrain and Saudi Arabian Grands Prix Will Not Take Place in April." Formula1.com. 16 Mar. 2026. www.formula1.com/en/latest/article/bahrain-and-saudi-arabian-grands-prix-will-not-take-place-in-april. Accessed 1 Apr. 2026.'},
+  {key:'("Bahrain Grand Prix")',ref:'"Bahrain Grand Prix: Human Rights Group Writes to F1 About Sportswashing." CNN. 27 Feb. 2023. edition.cnn.com/2023/02/27/motorsport/bahrain-grand-prix-formula-one-spt-intl/index.html. Accessed 1 Apr. 2026.'},
+  {key:'("Court Filing Casts")',ref:'"Court Filing Casts Doubt on Assurances Made on Saudi State\'s Involvement with Newcastle United." CNN. 2 Mar. 2023. www.cnn.com/2023/03/02/football/newcastle-united-saudi-arabia-pif-amnesty-spt-intl/index.html. Accessed 1 Apr. 2026.'},
+  {key:'("Gulf-Focused NGOs")',ref:'"Gulf-Focused NGOs Call on Premier League and UK Government to Curb State Ownership of Football Clubs." ALQST for Human Rights. 11 Aug. 2023. alqst.org/en/post/gulf-focused-ngos-call-on-premier-league-and-uk-government-to-curb-state-ownership-of-football-clubs. Accessed 1 Apr. 2026.'},
+  {key:'("Human Rights Issues")',ref:'"Human Rights Issues Involving the 2022 FIFA World Cup." Wikipedia. en.wikipedia.org/wiki/Human_rights_issues_involving_the_2022_FIFA_World_Cup. Accessed 1 Apr. 2026.'},
+  {key:'("Identity Matters")',ref:'"Identity Matters: Qatar and Paris Saint-Germain." Taylor and Francis Online. 2024. www.tandfonline.com/doi/abs/10.1080/21534764.2024.2356290. Accessed 1 Apr. 2026.'},
+  {key:'("Khaldoon Khalifa" — Mubadala)',ref:'"Khaldoon Khalifa Al Mubarak." Mubadala Investment Company. www.mubadala.com/en/who-we-are/investment-committee/khaldoon-al-mubarak. Accessed 1 Apr. 2026.'},
+  {key:'("Khaldoon Khalifa" — Wikipedia)',ref:'"Khaldoon Khalifa Al Mubarak." Wikipedia. en.wikipedia.org/wiki/Khaldoon_Al_Mubarak. Accessed 1 Apr. 2026.'},
+  {key:'(Langley)',ref:'Langley, Alex. "LIV\'s Mysterious Backer Finally Speaks: Deals, Goals, Playing with Tiger." Golf.com. 12 Sept. 2025. golf.com/news/liv-golf-yasir-al-rumayyan-speaks. Accessed 1 Apr. 2026.'},
+  {key:'("Man City 115 Charges")',ref:'"Man City 115 Charges Verdict Could Be Delayed for Another Year." SPORTbible. 16 Jan. 2026. www.sportbible.com/football/football-news/man-city-premier-league-115-charges-verdict-update-789308-20260116. Accessed 1 Apr. 2026.'},
+  {key:'("Man City FFP Case")',ref:'"Man City FFP Case: Fears of Undue Damage to Premier League Grow." Goal.com. 30 Jul. 2025. www.goal.com/en-us/lists/man-city-ffp-case-new-date-verdict-115-charges-set-fears-undue-damage-premier-league-grow/bltf1ec30ae78554697. Accessed 1 Apr. 2026.'},
+  {key:'("Man City Premier League")',ref:'"Man City Premier League Charges Explained: What Are They? What Could Punishment Be?" Sky Sports. 31 Jul. 2025. www.skysports.com/football/news/11679/12804623/man-city-premier-league-charges-explained-what-are-they-what-could-punishment-be-whats-the-timescale. Accessed 1 Apr. 2026.'},
+  {key:'(Minder)',ref:'Minder, Raluca. "FIFA Releases Reports on Qatar World Cup Workers\' Abuse, Saudi Arabia 2034." NPR. 30 Nov. 2024. www.npr.org/2024/11/30/nx-s1-5211297/soccer-qatar-world-cup-saudi-arabia-human-rights. Accessed 1 Apr. 2026.'},
+  {key:'("Mubadala Emerges")',ref:'"Mubadala Emerges as Top Global Sovereign Investor in 2024." The National. 1 Jan. 2025. www.thenationalnews.com/business/economy/2025/01/01/mubadala-emerges-as-top-global-sovereign-investor-in-2024. Accessed 1 Apr. 2026.'},
+  {key:'("Nasser Al-Khelaifi" — Wikipedia)',ref:'"Nasser Al-Khelaifi." Wikipedia. en.wikipedia.org/wiki/Nasser_Al-Khelaifi. Accessed 1 Apr. 2026.'},
+  {key:'("Nasser Al-Khelaifi\'s Indictment")',ref:'"Nasser Al-Khelaifi\'s Indictment Puts Qatar\'s PSG Investment in Grave Danger." Yahoo Sports. 13 Feb. 2025. sports.yahoo.com/nasser-al-khelaifi-indictment-puts-125900883.html. Accessed 1 Apr. 2026.'},
+  {key:'("Premier League Told")',ref:'"Premier League Told to Re-Examine Newcastle\'s Links to Saudi Arabia by Amnesty International After US Court Filing." Sky Sports. 2 Mar. 2023. www.skysports.com/football/news/11095/12823521/premier-league-told-to-re-examine-newcastles-links-to-saudi-arabia-by-amnesty-international-after-us-court-filing. Accessed 1 Apr. 2026.'},
+  {key:'("PSG Chief Charged")',ref:'"PSG Chief Charged in Qatar Championship Corruption Scandal." OCCRP. www.occrp.org/en/news/psg-chief-charged-in-qatar-championship-corruption-scandal. Accessed 1 Apr. 2026.'},
+  {key:'("Qatar: FIFA World Cup")',ref:'"Qatar: FIFA World Cup Opens Without Remedy for Migrants." Human Rights Watch. 19 Nov. 2022. www.hrw.org/news/2022/11/19/qatar-fifa-world-cup-opens-without-remedy-migrants. Accessed 1 Apr. 2026.'},
+  {key:'("Qatar: Six Months")',ref:'"Qatar: Six Months Post-World Cup, Migrant Workers Suffer." Human Rights Watch. 16 Jun. 2023. www.hrw.org/news/2023/06/16/qatar-six-months-post-world-cup-migrant-workers-suffer. Accessed 1 Apr. 2026.'},
+  {key:'("Qatar World Cup Chief")',ref:'"Qatar World Cup Chief Publicly Admits High Migrant Death Tolls." Human Rights Watch. 30 Nov. 2022. www.hrw.org/news/2022/11/30/qatar-world-cup-chief-publicly-admits-high-migrant-death-tolls. Accessed 1 Apr. 2026.'},
+  {key:'("Racing Against")',ref:'"Racing Against Human Rights: The Ethical Dilemma of Formula One\'s Expansion into Authoritarian Regimes." YIP Institute. 14 Nov. 2024. yipinstitute.org/capstone/racing-formula-one-expansion-ethical-dilemma. Accessed 1 Apr. 2026.'},
+  {key:'("The Authoritarian\'s")',ref:'"The Authoritarian\'s Guide to Football: The Reach and Repercussions of Qatar\'s Sports Empire." Columbia Journal of International Affairs. jia.sipa.columbia.edu/content/authoritarians-guide-football-reach-and-repercussions-qatars-sports-empire. Accessed 1 Apr. 2026.'},
+  {key:'("UAE: Abu Dhabi\'s")',ref:'"UAE: Abu Dhabi\'s Deal Machine Mubadala Is Run by a Rare Non-Royal." Bloomberg. 9 Dec. 2024. www.bloomberg.com/news/articles/2024-12-09/uae-abu-dhabi-s-deal-machine-mubadala-is-run-by-a-rare-non-royal. Accessed 1 Apr. 2026.'},
+  {key:'("What the Bahrain")',ref:'"What the Bahrain and Saudi Arabia Cancellations Reveal About F1 Calendar\'s Weakest Link." Biz of Speed. 14 Mar. 2026. www.bizofspeed.com/p/what-the-bahrain-and-saudi-arabia. Accessed 1 Apr. 2026.'},
+  {key:'("Who Is Yasir")',ref:'"Who Is Yasir Al-Rumayyan? LIV Golf Chairman and Saudi Public Investment Fund Governor." Golf Monthly. 7 Jun. 2023. www.golfmonthly.com/news/who-is-yasir-al-rumayyan-liv-golf-chairman-and-public-investment-fund-governor. Accessed 1 Apr. 2026.'},
+  {key:'("Who Owns PSG")',ref:'"Who Owns PSG Football Club? QSI Ownership Explained." cityam.com. 30 Oct. 2025. sportssurge.alibaba.com/football/who-owns-psg-football-club. Accessed 1 Apr. 2026.'},
+];
+
+document.getElementById('wc-list').innerHTML=wcEntries.map(e=>`
+  <div class="wc-entry">
+    <div class="wc-key">${e.key}</div>
+    <div class="wc-ref">${e.ref}</div>
+  </div>`).join('');
+</script>
+
+<script>
+const cv=document.getElementById('bg'),cx=cv.getContext('2d');
 function resize(){cv.width=innerWidth;cv.height=innerHeight;}
-resize(); window.addEventListener('resize',resize);
-
+resize();window.addEventListener('resize',resize);
 const pts=[];
-for(let i=0;i<90;i++) pts.push({
-  x:Math.random()*innerWidth, y:Math.random()*innerHeight,
-  r:Math.random()*1.8+.4, vy:-(Math.random()*.45+.15),
-  vx:(Math.random()-.5)*.25, op:Math.random()*.5+.1, ph:Math.random()*Math.PI*2
-});
-
+for(let i=0;i<70;i++)pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.6+.3,vy:-(Math.random()*.4+.12),vx:(Math.random()-.5)*.2,op:Math.random()*.4+.08,ph:Math.random()*Math.PI*2});
 function draw(){
   cx.clearRect(0,0,cv.width,cv.height);
-
-  // Base
   const bg=cx.createLinearGradient(0,0,cv.width,cv.height);
-  bg.addColorStop(0,'#06070d'); bg.addColorStop(1,'#07080e');
-  cx.fillStyle=bg; cx.fillRect(0,0,cv.width,cv.height);
-
-  // Moving orbs
-  const t=Date.now()*.001;
-  [[.18,.28,280,'rgba(201,168,76,.05)',.3,.2],
-   [.82,.62,320,'rgba(100,20,20,.05)',.25,.3],
-   [.5,.08,200,'rgba(201,168,76,.03)',.2,.15]].forEach(([fx,fy,r,c,st,sc])=>{
-    const ox=cv.width*fx+Math.sin(t*st)*55, oy=cv.height*fy+Math.cos(t*sc)*35;
+  bg.addColorStop(0,'#050c05');bg.addColorStop(1,'#030803');
+  cx.fillStyle=bg;cx.fillRect(0,0,cv.width,cv.height);
+  for(let i=0;i<cv.height;i+=80){cx.fillStyle=i%160===0?'rgba(255,255,255,.012)':'rgba(255,255,255,.006)';cx.fillRect(0,i,cv.width,40);}
+  const t=Date.now()*.0005;
+  cx.strokeStyle='rgba(46,168,46,.04)';cx.lineWidth=1;
+  cx.beginPath();cx.arc(cv.width/2,cv.height/2,Math.min(cv.width,cv.height)*.28,0,Math.PI*2);cx.stroke();
+  cx.beginPath();cx.arc(cv.width/2,cv.height/2,Math.min(cv.width,cv.height)*.16,0,Math.PI*2);cx.stroke();
+  cx.beginPath();cx.moveTo(cv.width/2,0);cx.lineTo(cv.width/2,cv.height);cx.stroke();
+  [[.15,.3,260,'rgba(26,92,26,.06)',.28,.18],[.85,.65,300,'rgba(212,160,23,.04)',.22,.28],[.5,.05,180,'rgba(46,168,46,.04)',.18,.12]].forEach(([fx,fy,r,c,st,sc])=>{
+    const ox=cv.width*fx+Math.sin(t*st)*50,oy=cv.height*fy+Math.cos(t*sc)*30;
     const g=cx.createRadialGradient(ox,oy,0,ox,oy,r);
-    g.addColorStop(0,c); g.addColorStop(1,'transparent');
-    cx.fillStyle=g; cx.fillRect(ox-r,oy-r,r*2,r*2);
+    g.addColorStop(0,c);g.addColorStop(1,'transparent');
+    cx.fillStyle=g;cx.fillRect(ox-r,oy-r,r*2,r*2);
   });
-
-  // Diamond grid
-  cx.strokeStyle='rgba(201,168,76,.028)'; cx.lineWidth=1;
-  const gs=90;
-  for(let x=0;x<cv.width+gs;x+=gs){
-    for(let y=0;y<cv.height+gs;y+=gs){
-      cx.beginPath();
-      cx.moveTo(x,y-gs/2); cx.lineTo(x+gs/2,y);
-      cx.lineTo(x,y+gs/2); cx.lineTo(x-gs/2,y);
-      cx.closePath(); cx.stroke();
-    }
-  }
-
-  // Particles
   pts.forEach(p=>{
-    p.y+=p.vy; p.x+=p.vx; p.ph+=.018;
-    if(p.y<-5){p.y=cv.height+5; p.x=Math.random()*cv.width;}
-    if(p.x<0)p.x=cv.width; if(p.x>cv.width)p.x=0;
+    p.y+=p.vy;p.x+=p.vx;p.ph+=.016;
+    if(p.y<-5){p.y=cv.height+5;p.x=Math.random()*cv.width;}
+    if(p.x<0)p.x=cv.width;if(p.x>cv.width)p.x=0;
     const op=p.op*(.7+.3*Math.sin(p.ph));
-    cx.beginPath(); cx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    cx.fillStyle=`rgba(201,168,76,${op})`; cx.fill();
+    cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    cx.fillStyle=`rgba(212,160,23,${op})`;cx.fill();
   });
-
   requestAnimationFrame(draw);
 }
 draw();
 
-// ═══════════════════════════════════════════
-// CHARACTER DATA
-// ═══════════════════════════════════════════
 const chars=[
-  {
-    id:'khaldoon', name:'Khaldoon Al Mubarak',
-    sub:'Abu Dhabi | Man City | Mubadala', init:'KM', flag:'🇦🇪',
-    cc:'#1565c0', cd:'rgba(21,101,192,.14)',
-    country:'United Arab Emirates (Abu Dhabi)', sport:'Football — Premier League',
-    fund:'Mubadala Investment Company — $330B',
-    diff:4, dlbl:'HIGH', dc:'#ff7043',
-    mission:'Turn a forgotten English club into a global empire. Don\'t get caught.',
-    hook:'"You turned a middling English club into the most dominant team in history. But the League has 115 questions for you."',
-    bio:'Khaldoon Al Mubarak is the Managing Director and CEO of Mubadala Investment Company, a $330 billion sovereign wealth fund with assets in over 50 countries. He has chaired Manchester City since 2008, overseeing its transformation into the first club in history to simultaneously hold the Champions League, Premier League, FA Cup, UEFA Super Cup, and FIFA Club World Cup (Mubadala.com). Described by Bloomberg as a rare non-royal running a Gulf sovereign wealth fund, he built Mubadala from a domestically-focused investor into a global force in AI, data centers, finance, and entertainment (Bloomberg, 2024). His roles straddle government and business entirely: he chairs the Executive Affairs Authority — the agency that advises the President of the UAE — while simultaneously running the fund that owns City. He is also the UAE\'s Presidential Special Envoy to China.',
-    yr:'2008', ctx:'Mubadala / Abu Dhabi United Group acquires Manchester City for £210 million.',
-    q:'How do you present the purchase to the public?',
-    oa:'"This is a business investment. We expect returns."',
-    ob:'"We love football. This is about the sport."',
-    rv:'Al Mubarak presented himself as a football chairman first, a government official second. The rebranding worked immediately. City\'s wage bill exploded. Trophies followed. The club that finished 9th in the Premier League the season before the takeover won its first league title in 44 years by 2012.'
-  },
-  {
-    id:'khelaifi', name:'Nasser Al-Khelaifi',
-    sub:'Qatar | PSG | beIN Sports', init:'NK', flag:'🇶🇦',
-    cc:'#8b0000', cd:'rgba(139,0,0,.14)',
-    country:'Qatar', sport:'Football — Ligue 1 & UEFA',
-    fund:'Qatar Investment Authority / QSI',
-    diff:5, dlbl:'VERY HIGH', dc:'#d32f2f',
-    mission:'Buy the most glamorous club in Europe. Control the broadcast rights. Sit at the table that makes the rules.',
-    hook:'"You bought the most expensive players, sit on UEFA\'s governing committee, and just got charged with vote-buying. Coincidence?"',
-    bio:'Al-Khelaifi is the chairman of Qatar Sports Investments (QSI), a subsidiary of the Qatar Investment Authority, and has served as PSG\'s president since QSI acquired the club in 2011 for approximately €50 million. He also chairs beIN Media Group, one of the world\'s largest sports broadcasters, and sits on the UEFA Executive Committee — giving him influence over both the clubs competing in European football and the body that regulates them (cityam.com). Under his leadership, QSI spent a world-record €222 million on Neymar alone, plus Kylian Mbappé and Lionel Messi, making PSG one of the highest-spending clubs in history. Scholars describe the takeover as Qatar using PSG to perform its national identity to a Western audience, demonstrating that an Arab and Islamic state could operate in harmony with European culture (Tandfonline, 2024).',
-    yr:'2011', ctx:'QSI acquires PSG for €50 million. You have effectively unlimited spending power.',
-    q:'How fast do you move in the transfer market?',
-    oa:'Build slowly. Develop youth. Be patient.',
-    ob:'Buy the best players on earth immediately.',
-    rv:'QSI moved immediately and lavishly. PSG won the French League title in their second season under Qatari ownership. By 2017 they had spent a world-record €222 million on a single player. Before QSI arrived, PSG had won the French league four times across their entire history. In the 13 seasons that followed, they won it 11 times (cityam.com).'
-  },
-  {
-    id:'rumayyan', name:'Yasir Al-Rumayyan',
-    sub:'Saudi Arabia | Newcastle | LIV Golf', init:'YR', flag:'🇸🇦',
-    cc:'#1b5e20', cd:'rgba(27,94,32,.14)',
-    country:'Saudi Arabia', sport:'Football — Premier League & Golf',
-    fund:'Saudi Public Investment Fund — $650B+',
-    diff:5, dlbl:'EXTREME', dc:'#b71c1c',
-    mission:'Buy an English football club. Launch a rival golf tour. Stay completely invisible while doing it.',
-    hook:'"You told the Premier League your fund was independent of the Saudi government. Then your own lawyers told a US court the opposite."',
-    bio:'Al-Rumayyan is the governor of Saudi Arabia\'s Public Investment Fund (PIF), appointed in 2019 with a direct mandate from Crown Prince Mohammed bin Salman to diversify Saudi Arabia away from oil (Golf Monthly, 2023). Under his watch, PIF led the takeover of Newcastle United in October 2021, with the Premier League approving the deal after receiving what it called "legally binding assurances" that the Saudi state would not control the club (Sky Sports, 2023). The following year, PIF launched LIV Golf with an estimated $2 billion in funding, triggering a legal war with the PGA Tour. Al-Rumayyan also chairs Saudi Aramco, one of the world\'s most valuable companies, and held board seats at Tesla and SoftBank. He almost never speaks publicly, letting others absorb the scrutiny.',
-    yr:'2021', ctx:'PIF acquires 80% of Newcastle United. The Premier League is asking questions about your independence from the Saudi government.',
-    q:'How do you respond?',
-    oa:'Be transparent. Acknowledge the links.',
-    ob:'Provide written assurances that the state will not control the club.',
-    rv:'PIF provided what the Premier League accepted as "legally binding assurances" that the Saudi state would not control Newcastle United (Sky Sports, 2023). The deal was approved in October 2021. Those assurances would be directly contradicted in a US court less than two years later, when PIF\'s own lawyers described Al-Rumayyan as "a sitting minister of the Saudi government."'
-  },
-  {
-    id:'thani', name:'Tamim bin Hamad Al Thani',
-    sub:'Qatar | 2022 FIFA World Cup', init:'TT', flag:'🇶🇦',
-    cc:'#6a1b9a', cd:'rgba(106,27,154,.14)',
-    country:'Qatar', sport:'Football — Global / FIFA',
-    fund:'Entire national treasury of Qatar',
-    diff:5, dlbl:'VERY HIGH', dc:'#d32f2f',
-    mission:'Host the biggest sporting event in human history. Build it from scratch. Control what the world sees.',
-    hook:'"You put on the biggest sporting event in human history. Thousands of workers may have died building it. FIFA still called it a strong proposition."',
-    bio:'As Emir of Qatar and founder of the Qatar Investment Authority, Al Thani oversaw every dimension of the country\'s 2022 World Cup — from the initial FIFA bid to the $220 billion infrastructure buildout. The World Cup was Qatar\'s most ambitious rebranding effort, but it was shadowed from the start by the Kafala labor system, under which a worker\'s ability to remain in Qatar legally depended entirely on their employer\'s approval, leaving them unable to switch jobs or return home without that sponsor\'s consent. A 2021 Guardian investigation estimated 6,500 migrant workers had died in Qatar since the bid was won in 2010. Qatar\'s own World Cup secretary-general admitted in a 2022 interview that between 400 and 500 workers had died in connection with preparations — directly contradicting the official Qatari position that only three work-related deaths had occurred on stadium sites (Human Rights Watch, 2022).',
-    yr:'2014', ctx:'International pressure is mounting over the Kafala labor system. Thousands of workers are building World Cup stadiums with no right to change jobs or leave the country.',
-    q:'What do you do?',
-    oa:'Reform the Kafala system immediately. No more abuse.',
-    ob:'Announce plans to reform. Delay implementation.',
-    rv:'Qatar announced plans to abolish Kafala in 2014 but delayed implementation until 2016, and even the eventual reforms still left employers with significant control over workers (Wikipedia). A 2021 Guardian investigation estimated 6,500 migrant workers had died in Qatar since the bid was won. Qatar\'s own World Cup secretary-general later admitted that between 400 and 500 workers died in connection with preparations (Human Rights Watch, 2022).'
-  },
-  {
-    id:'bensulayem', name:'Mohammed Ben Sulayem',
-    sub:'UAE | FIA President | Formula 1', init:'MB', flag:'🇦🇪',
-    cc:'#e65100', cd:'rgba(230,81,0,.14)',
-    country:'United Arab Emirates', sport:'Formula 1',
-    fund:'N/A — Controls the rules, not the money',
-    diff:3, dlbl:'MEDIUM', dc:'#f9a825',
-    mission:'Run the governing body of the world\'s most expensive sport. Keep Gulf races on the calendar. Don\'t ask too many questions.',
-    hook:'"You run the rules of a sport whose biggest paychecks come from the countries you represent."',
-    bio:'Mohammed Ben Sulayem is the president of the FIA, motorsport\'s global governing body, responsible for overseeing Formula 1 regulations and approving which countries can host races. He was elected FIA president in 2021, representing the UAE — one of the Gulf states paying hundreds of millions of dollars in annual F1 hosting fees. The 2026 F1 calendar featured five races in the Middle East, with Bahrain, Saudi Arabia, Qatar, and Abu Dhabi together accounting for over $250 million in annual hosting fees — roughly a third of F1\'s entire hosting fee category (Biz of Speed, 2026). This creates a direct structural conflict: the man who approves which countries can host races comes from one of the countries most invested in hosting them.',
-    yr:'2022', ctx:'Human rights organizations have written to F1 urging it not to "sportswash the blood-soaked images" of Bahrain and Saudi Arabia.',
-    q:'As FIA president, how do you respond?',
-    oa:'Investigate the concerns. Consider conditioning the races on human rights reforms.',
-    ob:'Defend the races as promoting cultural exchange and economic development.',
-    rv:'F1 consistently defended the Gulf races as promoting cultural exchange and economic development. By 2026, five races on the F1 calendar sat in the Middle East, collectively representing over $250 million in annual hosting fees. When the Bahrain and Saudi races were cancelled in March 2026 due to regional conflict, F1 CEO Domenicali called both countries "incredibly important to the ecosystem of our racing season" (Formula1.com, 2026).'
-  },
-  {
-    id:'domenicali', name:'Stefano Domenicali',
-    sub:'Italy | CEO of Formula 1', init:'SD', flag:'🇮🇹',
-    cc:'#c62828', cd:'rgba(198,40,40,.14)',
-    country:'Italy (represents Formula 1)', sport:'Formula 1',
-    fund:'F1\'s annual revenue — dependent on Gulf fees',
-    diff:2, dlbl:'LOW', dc:'#388e3c',
-    mission:'Grow Formula 1 into every market on earth. The Gulf pays the most. Keep adding races.',
-    hook:'"You tripled the number of Gulf races in under a decade. You called it cultural exchange. Human rights groups called it something else."',
-    bio:'Stefano Domenicali became CEO of Formula 1 in 2021 and presided over the rapid expansion of Gulf races on the calendar. Countries in the Middle East including Abu Dhabi, Bahrain, and Saudi Arabia each pay between $30 and $50 million in F1 hosting fees annually, funded directly from national treasuries — while European circuits like Silverstone operate against their own private balance sheets, paying approximately $26 million (YIP Institute, 2024; Biz of Speed, 2026). Human rights organizations including the Bahrain Institute for Rights and Democracy wrote to F1 urging it not to "sportswash the blood-soaked images" of Bahrain and Saudi Arabia, while Domenicali consistently defended the expansion as promoting cultural exchange and economic development (CNN, 2023).',
-    yr:'2021', ctx:'Saudi Arabia wants a Grand Prix. They will pay $55 million annually — more than double what most European circuits pay.',
-    q:'Do you add Saudi Arabia to the F1 calendar?',
-    oa:'No. The human rights record is disqualifying.',
-    ob:'Yes. The sport grows through inclusion, not exclusion.',
-    rv:'Saudi Arabia joined the F1 calendar in 2021, paying an estimated $55 million annually. By 2026, five Middle Eastern races accounted for over $250 million in annual hosting fees — roughly a third of F1\'s total. When Bahrain and Saudi races were cancelled in 2026 due to regional conflict, the cancellations exposed how financially dependent F1 had become on Gulf state treasuries (Biz of Speed, 2026; Formula1.com, 2026).'
-  },
-  {
-    id:'norman', name:'Greg Norman',
-    sub:'Australia / Saudi Arabia | LIV Golf', init:'GN', flag:'🇦🇺',
-    cc:'#f57f17', cd:'rgba(245,127,23,.14)',
-    country:'Australia — recruited and funded by Saudi Arabia', sport:'Golf',
-    fund:'Saudi PIF — estimated $5B invested in LIV by 2025',
-    diff:4, dlbl:'HIGH', dc:'#ff7043',
-    mission:'Build a rival golf tour from scratch. Be the face everyone argues with. Let Saudi Arabia stay invisible.',
-    hook:'"You built a golf tour that loses billions. Saudi Arabia considers it money well spent."',
-    bio:'Greg Norman, the former world number one golfer, was recruited by Saudi Arabia\'s Public Investment Fund to serve as the public face of LIV Golf, the rival tour launched in 2022 with approximately $2 billion in PIF funding. LIV\'s total investment was expected to reach $5 billion by the end of 2025, with the tour widely acknowledged as a financial loss — making clear that financial return was never the point (Golf.com, 2025). Norman absorbed the brunt of public criticism and media pressure while Al-Rumayyan remained almost entirely out of view. The PGA Tour sued LIV for antitrust violations and then attempted to merge with the very entity it had been suing, a process that stalled amid Congressional scrutiny in the United States.',
-    yr:'2022', ctx:'LIV Golf launches. Saudi Arabia\'s PIF is funding it. The criticism is immediate and intense — sportswashing accusations, PGA Tour bans, player defections.',
-    q:'How do you handle the backlash?',
-    oa:'Address the sportswashing allegations directly and publicly.',
-    ob:'Stay focused on golf. Let the money and the players speak for themselves.',
-    rv:'Norman and LIV largely deflected the sportswashing allegations by focusing on prize money and player freedom. Al-Rumayyan stayed almost entirely invisible. LIV\'s total investment was expected to reach $5 billion by end of 2025 — widely acknowledged as a financial loss. This was always the point. You cannot measure sportswashing on a spreadsheet. The PGA Tour eventually attempted to merge with the entity it had been suing (Golf.com, 2025).'
-  }
+  {id:'khaldoon',name:'Khaldoon Al Mubarak',sub:'Abu Dhabi | Man City | Mubadala',init:'KM',flag:'🇦🇪',cc:'#1565c0',cd:'rgba(21,101,192,.12)',country:'United Arab Emirates (Abu Dhabi)',sport:'Football — Premier League',fund:'Mubadala Investment Company — $330B',diff:4,dlbl:'HIGH',dc:'#ff7043',
+  mission:'Turn a forgotten English club into a global empire. Don\'t get caught.',
+  hook:'"You turned a middling English club into the most dominant team in history. But the League has 115 questions for you."',
+  bio:'Khaldoon Al Mubarak is the Managing Director and CEO of Mubadala Investment Company, a $330 billion sovereign wealth fund with assets in over 50 countries. He has chaired Manchester City since 2008, overseeing its transformation into the first club in history to simultaneously hold the Champions League, Premier League, FA Cup, UEFA Super Cup, and FIFA Club World Cup ("Khaldoon Khalifa" — Mubadala.com). Described by Bloomberg as a rare non-royal running a Gulf sovereign wealth fund, he built Mubadala from a domestically-focused investor into a global force in AI, data centers, finance, and entertainment ("UAE: Abu Dhabi\'s"). His roles straddle government and business entirely: he chairs the Executive Affairs Authority — the agency that advises the President of the UAE — while simultaneously running the fund that owns City.',
+  scenarios:[
+    {yr:'2008',ctx:'Abu Dhabi United Group has acquired Manchester City for £210 million. The club finished 9th last season. The media is skeptical. Fans are cautiously excited. You are both a government official and the new Chairman.',
+     q:'How do you present the takeover to the public?',oa:'Frame it as a pure business investment. Emphasize financial returns.',ob:'Lead with passion for football. Position yourself as a Chairman, not a government official.',
+     rv:'Al Mubarak presented himself as a football chairman first and a government official second. The rebranding worked immediately. City\'s wage bill exploded, world-class players arrived, and the club that finished 9th before the takeover won its first league title in 44 years by 2012.',consequence:null},
+    {yr:'2011',ctx:'UEFA has introduced Financial Fair Play rules to stop clubs spending beyond their means. Abu Dhabi wants to keep pouring money into City. Your lawyers have found a workaround: route the money through UAE-based sponsor companies and disguise it as commercial income.',
+     q:'Do you use the sponsorship workaround to get around FFP?',oa:'No. Comply fully with FFP. Accept the spending limits.',ob:'Yes. Route funds through Etihad Airways and Aabar Investment as "sponsorship."',
+     rv:'Leaked documents later published by Der Spiegel alleged that Abu Dhabi owner Sheikh Mansour routed funds through UAE-based sponsor companies including Etihad Airways and Aabar Investment to funnel money into City while disguising it as commercial sponsorship income. Those accounts were allegedly managed by Al Mubarak\'s own government agency ("Khaldoon Khalifa" — Wikipedia).',
+     consequence:'UEFA investigated and initially banned Manchester City from European competition for two seasons. The Court of Arbitration for Sport overturned the ban — not because City was cleared, but because the statute of limitations had expired on some charges.'},
+    {yr:'2023',ctx:'The Premier League has formally charged Manchester City with 115 alleged financial rules breaches covering 2009-2018. The true number is believed to be closer to 130. City denies everything. A verdict could theoretically mean relegation.',
+     q:'How do you respond publicly while the case proceeds?',oa:'Acknowledge the seriousness. Commit to full cooperation.',ob:'Express surprise. Deny wrongdoing. Continue business as usual.',
+     rv:'Manchester City denied any wrongdoing and continued spending. Since the independent hearing concluded in December 2024, the club spent nearly £500 million on new players with no verdict delivered ("Man City 115 Charges"). As of early 2026, the case remains unresolved — over three years after charges were first filed. Premier League officials privately expressed it was causing "undue damage" to the competition ("Man City FFP Case").',consequence:null}
+  ]},
+  {id:'khelaifi',name:'Nasser Al-Khelaifi',sub:'Qatar | PSG | beIN Sports',init:'NK',flag:'🇶🇦',cc:'#8b0000',cd:'rgba(139,0,0,.12)',country:'Qatar',sport:'Football — Ligue 1 & UEFA',fund:'Qatar Investment Authority / QSI',diff:5,dlbl:'VERY HIGH',dc:'#d32f2f',
+  mission:'Buy the most glamorous club in Europe. Control the broadcast rights. Sit at the table that makes the rules.',
+  hook:'"You bought the most expensive players, sit on UEFA\'s governing committee, and just got charged with vote-buying. Coincidence?"',
+  bio:'Al-Khelaifi is the chairman of Qatar Sports Investments (QSI), a subsidiary of the Qatar Investment Authority, and has served as PSG\'s president since QSI acquired the club in 2011 for approximately €50 million. He also chairs beIN Media Group, one of the world\'s largest sports broadcasters, and sits on the UEFA Executive Committee — giving him influence over both the clubs competing in European football and the body that regulates them ("Who Owns PSG"). Under his leadership, QSI spent a world-record €222 million on Neymar alone, plus Kylian Mbappé and Lionel Messi, making PSG one of the highest-spending clubs in history. Scholars describe the takeover as Qatar using PSG to perform its national identity to a Western audience, demonstrating that an Arab and Islamic state could operate in harmony with European culture ("Identity Matters").',
+  scenarios:[
+    {yr:'2011',ctx:'Qatar Sports Investments has just acquired PSG for approximately €50 million. The club is a mid-table mess. Qatar\'s goal is to become a global football brand before the 2022 World Cup — eleven years away.',
+     q:'How fast do you move in the transfer market?',oa:'Build slowly. Develop youth. Be patient.',ob:'Spend whatever it takes. Buy the biggest names on earth immediately.',
+     rv:'QSI moved immediately and lavishly. PSG won the French league title in their second season under Qatari ownership. By 2017 they spent a world-record €222 million on a single player. Before QSI arrived, PSG had won the French league four times in their entire history. In the 13 seasons that followed, they won it 11 times ("Who Owns PSG").',consequence:null},
+    {yr:'2017',ctx:'You want to sign Neymar from Barcelona for €222 million — shattering the world record. The transfer will almost certainly trigger a UEFA Financial Fair Play investigation. Qatar is hosting the World Cup in five years and needs PSG\'s brand to be global.',
+     q:'Do you push through the Neymar transfer?',oa:'No. The FFP risk is too great. Sign a cheaper alternative.',ob:'Yes. PSG\'s global brand value is worth more than any fine.',
+     rv:'QSI signed Neymar for €222 million and then Mbappé shortly after. UEFA opened a financial fair play investigation. The case exposed how difficult it was for UEFA to actually punish state-backed clubs — Qatar\'s wealth made any fine essentially meaningless. UEFA eventually settled. PSG kept both players ("Who Owns PSG").',
+     consequence:'UEFA\'s FFP rules proved effectively unenforceable against sovereign wealth-backed clubs. The Neymar transfer demonstrated that the system had been rendered obsolete.'},
+    {yr:'2019',ctx:'You are offered a seat on the UEFA Executive Committee — the governing body that regulates the very clubs you compete against and the competitions PSG enters. The conflict of interest is obvious to everyone.',
+     q:'Do you accept the UEFA Executive Committee seat?',oa:'No. The conflict of interest is too visible.',ob:'Yes. This is exactly the kind of institutional influence Qatar needs.',
+     rv:'Al-Khelaifi accepted and has been a member of the UEFA Executive Committee since 2019. He was also elected chairman of European Football Clubs in 2021 and became its representative on the FIFA Council in 2025 ("Nasser Al-Khelaifi" — Wikipedia). In February 2025, he was placed under formal criminal investigation in France for complicity in vote buying, interference with voting freedom, and abuse of power ("Nasser Al-Khelaifi\'s Indictment").',consequence:null}
+  ]},
+  {id:'rumayyan',name:'Yasir Al-Rumayyan',sub:'Saudi Arabia | Newcastle | LIV Golf',init:'YR',flag:'🇸🇦',cc:'#1b5e20',cd:'rgba(27,94,32,.12)',country:'Saudi Arabia',sport:'Football — Premier League & Golf',fund:'Saudi Public Investment Fund — $650B+',diff:5,dlbl:'EXTREME',dc:'#b71c1c',
+  mission:'Buy an English football club. Launch a rival golf tour. Stay completely invisible while doing it.',
+  hook:'"You told the Premier League your fund was independent of the Saudi government. Then your own lawyers told a US court the opposite."',
+  bio:'Al-Rumayyan is the governor of Saudi Arabia\'s Public Investment Fund (PIF), appointed in 2019 with a direct mandate from Crown Prince Mohammed bin Salman to diversify Saudi Arabia away from oil ("Who Is Yasir"). Under his watch, PIF led the takeover of Newcastle United in October 2021, with the Premier League approving the deal after receiving what it called "legally binding assurances" that the Saudi state would not control the club ("Premier League Told"). The following year, PIF launched LIV Golf with an estimated $2 billion in funding, triggering a legal war with the PGA Tour. Al-Rumayyan also chairs Saudi Aramco, one of the world\'s most valuable companies, and held board seats at Tesla and SoftBank. He almost never speaks publicly.',
+  scenarios:[
+    {yr:'2021',ctx:'The Premier League is reviewing PIF\'s bid to buy 80% of Newcastle United. The sticking point: the league demands assurances that the Saudi state will not control the club. Crown Prince Mohammed bin Salman chairs PIF. Eight of nine PIF board members are government ministers.',
+     q:'How do you secure Premier League approval?',oa:'Be transparent about the fund\'s links to the Saudi government.',ob:'Provide written assurances that the state will not control the club.',
+     rv:'PIF provided what the Premier League accepted as "legally binding assurances" that the Saudi state would not control Newcastle United ("Premier League Told"). The deal was approved in October 2021. Less than two years later, PIF\'s own lawyers described Al-Rumayyan as "a sitting minister of the Saudi government" in a US court filing — directly contradicting those assurances ("Court Filing Casts").',
+     consequence:'Amnesty International called the assurances "stretching credulity to breaking point." The Premier League declined to comment. Newcastle kept its owners.'},
+    {yr:'2022',ctx:'LIV Golf is launching. PIF is funding it with an estimated $2 billion. You need a public face — someone the golf world knows — so Saudi Arabia can stay invisible. Greg Norman has agreed to be commissioner and absorb every press conference.',
+     q:'How visible do you want to be as LIV\'s financial backer?',oa:'Step forward. Be transparent about Saudi Arabia\'s role.',ob:'Stay invisible. Let Norman take every hard question.',
+     rv:'Al-Rumayyan remained almost entirely out of public view throughout LIV\'s launch and the subsequent legal war with the PGA Tour. Norman absorbed every accusation and criticism. Al-Rumayyan\'s rare public interview — in which he acknowledged LIV was not primarily a financial investment — was described by golf journalists as remarkable for its rarity (Langley).',
+     consequence:'LIV\'s total investment was expected to reach $5 billion by end of 2025 — widely acknowledged as a financial drain. This was always the point. You cannot measure sportswashing on a spreadsheet.'},
+    {yr:'2023',ctx:'The PGA Tour is suing LIV Golf for antitrust violations in US federal court. LIV\'s lawyers want to argue sovereign immunity — meaning PIF is an arm of the Saudi government. But making that argument directly contradicts what you told the Premier League about Newcastle.',
+     q:'Do you let your lawyers make the sovereign immunity argument?',oa:'No. The contradiction with Newcastle assurances is too damaging.',ob:'Yes. Winning the legal case is the priority right now.',
+     rv:'LIV\'s lawyers described PIF as "a sovereign instrumentality of the Kingdom of Saudi Arabia" and Al-Rumayyan as "a sitting minister of the Saudi government" — the exact opposite of what PIF told the Premier League when seeking approval for the Newcastle takeover ("Court Filing Casts"). The Premier League declined to comment publicly. Newcastle kept its owners.',consequence:null}
+  ]},
+  {id:'thani',name:'Tamim bin Hamad Al Thani',sub:'Qatar | 2022 FIFA World Cup',init:'TT',flag:'🇶🇦',cc:'#6a1b9a',cd:'rgba(106,27,154,.12)',country:'Qatar',sport:'Football — Global / FIFA',fund:'Entire national treasury of Qatar',diff:5,dlbl:'VERY HIGH',dc:'#d32f2f',
+  mission:'Host the biggest sporting event in human history. Build it from scratch. Control what the world sees.',
+  hook:'"You put on the biggest sporting event in human history. Thousands of workers may have died building it. FIFA still called it a strong proposition."',
+  bio:'As Emir of Qatar and founder of the Qatar Investment Authority, Al Thani oversaw every dimension of the country\'s 2022 World Cup — from the initial FIFA bid to the $220 billion infrastructure buildout. The World Cup was Qatar\'s most ambitious rebranding effort, but it was shadowed from the start by the Kafala labor system, under which a worker\'s ability to remain in Qatar legally depended entirely on their employer\'s approval, leaving them unable to switch jobs or return home without that sponsor\'s consent. A 2021 Guardian investigation estimated 6,500 migrant workers had died in Qatar since the bid was won in 2010. Qatar\'s own World Cup secretary-general admitted in a 2022 interview that between 400 and 500 workers had died in connection with preparations — directly contradicting the official Qatari position that only three work-related deaths had occurred on stadium sites ("Qatar World Cup Chief").',
+  scenarios:[
+    {yr:'2010',ctx:'FIFA has awarded Qatar the 2022 World Cup. Allegations of bribery are immediate. The summer heat reaches 50°C. Millions of migrant workers will need to build eight stadiums and $220 billion in infrastructure under a Kafala system that ties their legal status to their employer.',
+     q:'How do you respond to the labor rights concerns before construction begins?',oa:'Reform Kafala immediately. Announce a worker protection fund before a single brick is laid.',ob:'Acknowledge the concerns. Announce reforms. Implement them gradually over the coming years.',
+     rv:'Qatar announced plans to abolish Kafala in 2014 but delayed implementation until 2016, and even the eventual reforms still left employers with significant control over workers ("Human Rights Issues"). The International Trade Union Confederation estimated over 1,200 workers had died on World Cup infrastructure projects by 2013 — before most stadium construction had even begun.',
+     consequence:'A 2021 Guardian investigation estimated 6,500 migrant workers had died in Qatar since the bid was won. Qatar\'s government disputed the methodology but never released its own comprehensive death toll.'},
+    {yr:'2022',ctx:'The World Cup is underway. 1.2 million fans have arrived. In a live TV interview, Qatar\'s World Cup secretary-general is asked directly about worker deaths. The official position is three stadium deaths. The Guardian\'s estimate is 6,500 since 2010.',
+     q:'How does Qatar respond publicly to the death toll question?',oa:'Acknowledge the full scale. Announce a compensation fund for workers\' families.',ob:'Maintain the official stadium death count. Dispute the broader estimates.',
+     rv:'Qatar\'s World Cup secretary-general admitted in the interview that between 400 and 500 workers had died in connection with preparations — while simultaneously repeating the official position that only three work-related deaths had occurred on stadium sites. Human Rights Watch called this a striking inadvertent admission ("Qatar World Cup Chief"). No compensation fund was established. FIFA did not mandate one.',
+     consequence:'A FIFA-commissioned report released in 2024 found that "severe human rights impacts did ultimately occur in Qatar from 2010 through 2022" and that "a credible argument can be made" that FIFA bore some responsibility (Minder). FIFA awarded Saudi Arabia the 2034 World Cup the same year.'},
+    {yr:'2024',ctx:'The tournament is over. FIFA has commissioned a report acknowledging severe human rights impacts occurred. Workers and their families are calling for a compensation fund. The estimated 6,500 deaths remain largely uninvestigated. FIFA awarded the 2034 World Cup to Saudi Arabia.',
+     q:'Does Qatar establish a remedy fund for workers and their families?',oa:'Yes. Qatar takes responsibility and establishes a full compensation fund.',ob:'No. Qatar disputes the figures and considers existing mechanisms sufficient.',
+     rv:'Qatar rejected the proposal for a remedy fund. Qatar\'s Labour Minister told the European Parliament that workers who believed they were owed compensation should "come forward," despite the fact that most workers had already left Qatar and many families were in South Asia with no realistic mechanism to pursue claims ("Qatar: FIFA World Cup"). Neither Qatar nor FIFA established a comprehensive remedy fund.',consequence:null}
+  ]},
+  {id:'bensulayem',name:'Mohammed Ben Sulayem',sub:'UAE | FIA President | Formula 1',init:'MB',flag:'🇦🇪',cc:'#e65100',cd:'rgba(230,81,0,.12)',country:'United Arab Emirates',sport:'Formula 1',fund:'N/A — Controls the rules, not the money',diff:3,dlbl:'MEDIUM',dc:'#f9a825',
+  mission:'Run the governing body of the world\'s most expensive sport. Keep Gulf races on the calendar. Don\'t ask too many questions.',
+  hook:'"You run the rules of a sport whose biggest paychecks come from the countries you represent."',
+  bio:'Mohammed Ben Sulayem is the president of the FIA, motorsport\'s global governing body, responsible for overseeing Formula 1 regulations and approving which countries can host races. He was elected FIA president in 2021, representing the UAE — one of the Gulf states paying hundreds of millions of dollars in annual F1 hosting fees. The 2026 F1 calendar featured five races in the Middle East, with Bahrain, Saudi Arabia, Qatar, and Abu Dhabi together accounting for over $250 million in annual hosting fees — roughly a third of F1\'s entire hosting fee category ("What the Bahrain"). This creates a direct structural conflict: the man who approves which countries can host races comes from one of the countries most invested in hosting them.',
+  scenarios:[
+    {yr:'2021',ctx:'You have just been elected FIA president, representing the UAE. Gulf states pay between $30 and $50 million per race in hosting fees — far more than European circuits. Human rights organizations have been writing to F1 for years about conditions in Bahrain and Saudi Arabia.',
+     q:'As FIA president, do you commission an independent human rights review of race host nations?',oa:'Yes. The FIA should set minimum standards and review host nations independently.',ob:'No. F1\'s role is motorsport, not geopolitics.',
+     rv:'F1 and the FIA consistently defended Gulf races as promoting cultural exchange and economic development. By 2026, five Middle Eastern races accounted for over $250 million in annual hosting fees — roughly a third of F1\'s total ("What the Bahrain"). When asked about sportswashing, Domenicali said the sport was "not the policeman of the world."',
+     consequence:'The Bahrain Institute for Rights and Democracy urged F1 not to "sportswash the blood-soaked images" of Bahrain and Saudi Arabia ("Bahrain Grand Prix"). F1 did not respond with any structural changes.'},
+    {yr:'2026',ctx:'Regional conflict has broken out. Iran has struck Gulf states following US-Israeli strikes. The Bahrain and Saudi Arabian Grands Prix are scheduled for April. Both countries are under direct attack. The races are worth $115 million combined.',
+     q:'Do you cancel the races?',oa:'Cancel immediately. Safety is non-negotiable.',ob:'Wait and monitor. These are critical races for the sport\'s finances.',
+     rv:'F1 cancelled both races in March 2026 after it became clear the security situation would not improve. Domenicali called Bahrain and Saudi Arabia "incredibly important to the ecosystem of our racing season" even while announcing the cancellations ("Bahrain and Saudi Arabian"). The episode revealed how financially exposed F1 had made itself by building a third of its calendar around Gulf state payments.',consequence:null}
+  ]},
+  {id:'domenicali',name:'Stefano Domenicali',sub:'Italy | CEO of Formula 1',init:'SD',flag:'🇮🇹',cc:'#c62828',cd:'rgba(198,40,40,.12)',country:'Italy (represents Formula 1)',sport:'Formula 1',fund:'F1\'s annual revenue — dependent on Gulf fees',diff:2,dlbl:'LOW',dc:'#388e3c',
+  mission:'Grow Formula 1 into every market on earth. The Gulf pays the most. Keep adding races.',
+  hook:'"You tripled the number of Gulf races in under a decade. You called it cultural exchange. Human rights groups called it something else."',
+  bio:'Stefano Domenicali became CEO of Formula 1 in 2021 and presided over the rapid expansion of Gulf races on the calendar. Countries in the Middle East including Abu Dhabi, Bahrain, and Saudi Arabia each pay between $30 and $50 million in F1 hosting fees annually, funded directly from national treasuries — while European circuits like Silverstone operate against their own private balance sheets, paying approximately $26 million ("Racing Against"; "What the Bahrain"). Human rights organizations including the Bahrain Institute for Rights and Democracy wrote to F1 urging it not to "sportswash the blood-soaked images" of Bahrain and Saudi Arabia, while Domenicali consistently defended the expansion as promoting cultural exchange ("Bahrain Grand Prix").',
+  scenarios:[
+    {yr:'2021',ctx:'Saudi Arabia wants a Formula 1 Grand Prix. They will pay an estimated $55 million annually — more than double what Silverstone pays. Human rights groups are warning publicly that adding Saudi Arabia to the calendar will be seen as legitimizing the regime.',
+     q:'Do you add Saudi Arabia to the F1 calendar?',oa:'No. The human rights situation disqualifies the bid.',ob:'Yes. Formula 1 promotes development through inclusion, not exclusion.',
+     rv:'Saudi Arabia joined the F1 calendar in 2021, paying approximately $55 million annually. Domenicali consistently defended the decision as promoting cultural exchange. By 2026, five Middle Eastern races accounted for over $250 million in annual hosting fees — roughly a third of F1\'s total ("What the Bahrain"). The Bahrain Institute for Rights and Democracy called on F1 not to "sportswash the blood-soaked images" of both countries ("Bahrain Grand Prix").',consequence:null},
+    {yr:'2023',ctx:'Human rights groups have written formal letters to F1. Lewis Hamilton has said F1 has a "massive issue" with human rights. You are about to give a press conference addressing the sportswashing accusations directly.',
+     q:'How do you respond?',oa:'Acknowledge the tension. Commit to human rights conditions in future hosting contracts.',ob:'Defend the races. Say F1 is not the policeman of the world.',
+     rv:'Domenicali and F1 leadership consistently deflected human rights criticism, framing Gulf races as opportunities for cultural exchange and economic development ("Bahrain Grand Prix"). No human rights conditions were attached to Gulf hosting contracts. Gulf states paid from national treasuries while European circuits operated private commercial balance sheets — making them structurally irreplaceable on short notice, as the March 2026 cancellations demonstrated ("What the Bahrain").',consequence:null}
+  ]},
+  {id:'norman',name:'Greg Norman',sub:'Australia / Saudi Arabia | LIV Golf',init:'GN',flag:'🇦🇺',cc:'#f57f17',cd:'rgba(245,127,23,.12)',country:'Australia — recruited and funded by Saudi Arabia',sport:'Golf',fund:'Saudi PIF — estimated $5B invested in LIV by 2025',diff:4,dlbl:'HIGH',dc:'#ff7043',
+  mission:'Build a rival golf tour from scratch. Be the face everyone argues with. Let Saudi Arabia stay invisible.',
+  hook:'"You built a golf tour that loses billions. Saudi Arabia considers it money well spent."',
+  bio:'Greg Norman, the former world number one golfer, was recruited by Saudi Arabia\'s Public Investment Fund to serve as the public face of LIV Golf, the rival tour launched in 2022 with approximately $2 billion in PIF funding. LIV\'s total investment was expected to reach $5 billion by the end of 2025, with the tour widely acknowledged as a financial loss — making clear that financial return was never the point (Langley). Norman absorbed the brunt of public criticism and media pressure while Al-Rumayyan remained almost entirely out of view. The PGA Tour sued LIV for antitrust violations and then attempted to merge with the very entity it had been suing, a process that stalled amid Congressional scrutiny in the United States.',
+  scenarios:[
+    {yr:'2022',ctx:'LIV Golf is launching. The PGA Tour immediately bans LIV players from its events. The press is calling it Saudi sportswashing. Every journalist at every press conference will ask you about Jamal Khashoggi, human rights, and Mohammed bin Salman. Al-Rumayyan is nowhere to be seen.',
+     q:'How do you handle the sportswashing question?',oa:'Acknowledge Saudi Arabia\'s human rights record. Engage with the criticism directly.',ob:'Redirect to golf — prize money, player freedom, growing the game.',
+     rv:'Norman consistently redirected criticism toward golf — prize money, player freedom, and competitive opportunity. Al-Rumayyan remained almost entirely invisible throughout. LIV\'s total investment was expected to reach $5 billion by end of 2025, widely acknowledged as a financial loss. This was always the point. As one analyst noted, you cannot measure sportswashing on a spreadsheet (Langley).',
+     consequence:'The PGA Tour\'s commissioner told reporters that the question of what Al-Rumayyan wanted from sports was "a question for him to answer, not for me" — even while the PGA Tour was suing LIV in federal court (Langley).'},
+    {yr:'2023',ctx:'The PGA Tour has filed an antitrust lawsuit against LIV. Top players are suspended from both tours. The legal battle is costing tens of millions. Then, remarkably, the PGA Tour proposes a merger with LIV — the entity it has been suing. Al-Rumayyan would become chairman of any combined entity.',
+     q:'Do you support the PGA-LIV merger negotiations?',oa:'No. LIV should remain independent and keep competing.',ob:'Yes. Merging means Saudi Arabia gains formal influence over the entire sport of golf.',
+     rv:'Merger negotiations between the PGA Tour and PIF began in 2023. The process stalled amid Congressional scrutiny in the United States and disagreement over governance terms. Al-Rumayyan was set to become chairman of the combined entity (Langley). The PGA Tour had effectively moved from suing Saudi Arabia to negotiating the terms of its own acquisition — a pattern visible across every sport in this simulator.',consequence:null}
+  ]}
 ];
 
-// ═══════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════
-let current='land', selected=null, revealed=false;
-
-const screenMap={
-  land:'s-land', select:'s-select', p1:'s-p1',
-  p2:'s-p2', p3:'s-p3', dossier:'s-dossier',
-  big:'s-big', verdict:'s-verdict'
-};
-
-const backMap={
-  select:'land', p1:'select', p2:'p1',
-  p3:'p2', dossier:'p3', big:'dossier', verdict:'big'
-};
+let current='land',selected=null,scenarioIdx=0,scenarioRevealed=false;
+const screenMap={land:'s-land',select:'s-select',p1:'s-p1',p2:'s-p2',p3:'s-p3',dossier:'s-dossier',big:'s-big',verdict:'s-verdict',wc:'s-wc'};
+const backMap={select:'land',p1:'select',p2:'p1',p3:'p2',dossier:'p3',big:'dossier',verdict:'big',wc:'land'};
 
 function go(scr){
   document.querySelectorAll('.scr').forEach(s=>{s.classList.remove('on');s.style.display='none';});
   const el=document.getElementById(screenMap[scr]);
   if(el){el.style.display='block';el.classList.add('on');}
-  current=scr;
-  window.scrollTo(0,0);
-  document.getElementById('nav-back').classList.toggle('hide', scr==='land');
-  if(scr==='verdict') setTimeout(animVerdict,500);
+  current=scr;window.scrollTo(0,0);
+  document.getElementById('nav-back').classList.toggle('hide',scr==='land');
+  if(scr==='verdict')setTimeout(animVerdict,500);
 }
+function goBack(){go(backMap[current]||'land');}
 
-function goBack(){
-  const dest=backMap[current]||'land';
-  go(dest);
-}
-
-// ═══════════════════════════════════════════
-// RENDER CHARACTERS
-// ═══════════════════════════════════════════
 function renderGrid(){
-  const g=document.getElementById('char-grid');
-  g.innerHTML=chars.map(c=>`
-    <div class="ccard" style="--cc:${c.cc};--cc-dim:${c.cd};" onclick="openBio('${c.id}')">
+  document.getElementById('char-grid').innerHTML=chars.map(c=>`
+    <div class="ccard" style="--cc:${c.cc};--cd:${c.cd};" onclick="openBio('${c.id}')">
       <div class="ccard-top">
         <div class="avatar" style="border-color:${c.cc};background:${c.cd};color:${c.cc};">${c.init}</div>
-        <div>
-          <div class="ccard-name">${c.flag} ${c.name}</div>
-          <div class="ccard-sub">${c.sub}</div>
-        </div>
+        <div><div class="ccard-name">${c.flag} ${c.name}</div><div class="ccard-sub">${c.sub}</div></div>
       </div>
       <div class="stat-row"><span class="stat-lbl">SPORT</span>${c.sport}</div>
-      <div class="stat-row">
-        <span class="stat-lbl">DIFFICULTY</span>
+      <div class="stat-row"><span class="stat-lbl">DIFFICULTY</span>
         <div class="diff-bar">
-          ${[1,2,3,4,5].map(i=>`<div class="dd ${i<=c.diff?'on':''}" style="${i<=c.diff?`background:${c.dc}`:''};"></div>`).join('')}
+          ${[1,2,3,4,5].map(i=>`<div class="dd ${i<=c.diff?'on':''}" style="${i<=c.diff?`background:${c.dc}`:''}"></div>`).join('')}
           <span class="diff-txt" style="color:${c.dc};">${c.dlbl}</span>
         </div>
       </div>
       <div class="ccard-hook">${c.hook}</div>
       <div class="ccard-cta" style="color:${c.cc};">Play as ${c.name.split(' ')[0]}</div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-// ═══════════════════════════════════════════
-// BIO MODAL
-// ═══════════════════════════════════════════
 function openBio(id){
   selected=chars.find(c=>c.id===id);
-  const m=document.getElementById('bio-modal');
   const box=document.getElementById('bio-box');
   box.style.setProperty('--bcc',selected.cc);
-  box.style.setProperty('--bcc-dim',selected.cd);
+  box.style.setProperty('--bcd',selected.cd);
   document.getElementById('bio-inner').innerHTML=`
     <div class="bio-top">
       <div class="bio-av" style="border-color:${selected.cc};background:${selected.cd};color:${selected.cc};">${selected.init}</div>
-      <div>
-        <div class="bio-name">${selected.flag} ${selected.name}</div>
-        <div class="bio-sub">${selected.country} | ${selected.sport}</div>
-        <div class="bio-fund">Fund: ${selected.fund}</div>
-      </div>
+      <div><div class="bio-name">${selected.flag} ${selected.name}</div><div class="bio-sub">${selected.country} | ${selected.sport}</div><div class="bio-fund">${selected.fund}</div></div>
     </div>
     <div class="bio-mission">Mission: ${selected.mission}</div>
     <p class="bio-text">${selected.bio}</p>
     <div class="bio-acts">
-      <button class="btn btn-gold" onclick="startPlay()">Play as ${selected.name.split(' ')[0]} →</button>
+      <button class="btn btn-gold" onclick="startPlay()">Play as ${selected.name.split(' ')[0]} &#x2192;</button>
       <button class="btn btn-outline" onclick="closeBio()">Back to Roster</button>
-    </div>
-  `;
-  m.classList.add('open');
+    </div>`;
+  document.getElementById('bio-modal').classList.add('open');
 }
-
 function closeBio(){document.getElementById('bio-modal').classList.remove('open');}
 
-// ═══════════════════════════════════════════
-// PHASE 1
-// ═══════════════════════════════════════════
-function startPlay(){
-  closeBio();
-  revealed=false;
-  const c=selected;
+function startPlay(){closeBio();scenarioIdx=0;renderScenario();go('p1');}
+
+function renderScenario(){
+  const c=selected,sc=c.scenarios[scenarioIdx],total=c.scenarios.length;
+  scenarioRevealed=false;
+  const bars=Array.from({length:total},(_,i)=>`<div class="sp ${i<scenarioIdx?'done':i===scenarioIdx?'on':''}"></div>`).join('');
   document.getElementById('p1-content').innerHTML=`
-    <p class="dec-ctx">${c.flag} ${c.name.toUpperCase()} — ${c.yr}</p>
-    <p class="dec-setup">${c.ctx}</p>
-    <h2 class="dec-q">${c.q}</h2>
+    <div class="scenario-prog">${bars}<span class="sp-lbl">Decision ${scenarioIdx+1} of ${total}</span></div>
+    <p class="dec-ctx">${c.flag} ${c.name.toUpperCase()}</p>
+    <div class="dec-year">${sc.yr}</div>
+    <div class="ctx-box"><p class="ctx-txt">${sc.ctx}</p></div>
+    <h2 class="dec-q">${sc.q}</h2>
     <div class="opts">
-      <div class="opt" id="oa" onclick="pick('a')">
-        <div class="opt-lbl">OPTION A</div>
-        <div class="opt-txt">${c.oa}</div>
-      </div>
-      <div class="opt" id="ob" onclick="pick('b')">
-        <div class="opt-lbl">OPTION B</div>
-        <div class="opt-txt">${c.ob}</div>
-      </div>
+      <div class="opt" id="oa" onclick="pick('a')"><div class="opt-lbl">Option A</div><div class="opt-txt">${sc.oa}</div></div>
+      <div class="opt" id="ob" onclick="pick('b')"><div class="opt-lbl">Option B</div><div class="opt-txt">${sc.ob}</div></div>
     </div>
     <div class="reveal" id="rv">
       <div class="rev-lbl">What Actually Happened</div>
-      <p class="rev-txt">${c.rv}</p>
+      <p class="rev-txt">${sc.rv}</p>
+      ${sc.consequence?`<div class="consequence" id="con"><div class="con-lbl">Consequence</div><p class="con-txt">${sc.consequence}</p></div>`:''}
     </div>
-    <div id="p1-next" style="display:none;text-align:center;margin-top:28px;">
-      <p style="font-size:16px;color:var(--dim);font-style:italic;margin-bottom:18px;">The entry is complete. Now the world starts paying attention.</p>
-      <button class="btn btn-gold" onclick="go('p2')">Continue to Phase 2 →</button>
-    </div>
-  `;
-  go('p1');
+    <div class="next-btn-row" id="nxt">
+      ${scenarioIdx<total-1
+        ?`<p>The story continues. The next decision is already made.</p><button class="btn btn-gold" onclick="nextScenario()">Next Decision &#x2192;</button>`
+        :`<p>The entry is complete. The world is starting to pay attention.</p><button class="btn btn-gold" onclick="go('p2')">Continue to Phase 2 &#x2192;</button>`}
+    </div>`;
 }
 
 function pick(opt){
-  if(revealed)return;
-  revealed=true;
+  if(scenarioRevealed)return;
+  scenarioRevealed=true;
   document.getElementById('oa').classList.toggle('sel',opt==='a');
   document.getElementById('ob').classList.toggle('sel',opt==='b');
-  const rv=document.getElementById('rv');
-  rv.classList.add('show');
-  document.getElementById('p1-next').style.display='block';
+  const rv=document.getElementById('rv');rv.classList.add('show');
+  const con=document.getElementById('con');
+  if(con)setTimeout(()=>con.classList.add('show'),280);
+  document.getElementById('nxt').style.display='block';
   setTimeout(()=>rv.scrollIntoView({behavior:'smooth',block:'nearest'}),120);
 }
+function nextScenario(){scenarioIdx++;renderScenario();window.scrollTo(0,0);}
 
-// ═══════════════════════════════════════════
-// VERDICT ANIMATIONS
-// ═══════════════════════════════════════════
 function animVerdict(){
-  ['vq1','vq2','vq3'].forEach((id,i)=>{
-    setTimeout(()=>{
-      const el=document.getElementById(id);
-      if(el)el.classList.add('vis');
-    },i*650);
-  });
+  ['vq1','vq2','vq3'].forEach((id,i)=>setTimeout(()=>{const el=document.getElementById(id);if(el)el.classList.add('vis');},i*700));
 }
 
-// ═══════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════
 renderGrid();
-document.querySelectorAll('.scr').forEach(s=>{
-  if(!s.classList.contains('on'))s.style.display='none';
-});
+document.querySelectorAll('.scr').forEach(s=>{if(!s.classList.contains('on'))s.style.display='none';});
 </script>
 </body>
 </html>
